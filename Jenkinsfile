@@ -47,7 +47,7 @@ pipeline {
                             git show-ref | grep `git rev-parse HEAD` | 
                             awk '{ print \$2 }' | awk -F/ '{ print \$NF}'
                         """).trim()
-                    SERVER = "${BRANCH == 'master' ? 'iso' : 'bmstagedev'}"
+                    SERVER = "hosaka.local:5000"
                 }
                 echo "BRANCH: ${BRANCH}"
                 echo "SERVER: ${SERVER}"
@@ -66,7 +66,7 @@ pipeline {
             steps {
                 script {
                     IMG = ("""\
-                        ${SERVER}.penguincomputing.com:5000/runxhpl:\
+                        ${SERVER}/runxhpl:\
                         ${TAG_HASH}
                     """.stripIndent().replaceAll("\\s","")
                     )
