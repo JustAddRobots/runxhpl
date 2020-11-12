@@ -18,8 +18,11 @@ import re
 import statistics
 import time
 
+from engcommon import command
+from engcommon import fileio
+from engcommon import formattext
 from engcommon import hardware
-from engcommon import util
+from engcommon import testvar
 
 logger = logging.getLogger(__name__)
 
@@ -141,7 +144,7 @@ class XHPL:
             int(mem_percent)
         except ValueError:
             logger.error("Invalid Integer Error")
-            logger.debug(util.get_debug(mem_percent))
+            logger.debug(testvar.get_debug(mem_percent))
         return mem_percent
 
     def _get_num_cores(self):
@@ -257,16 +260,16 @@ class XHPL:
         ).name
         xhpl_bin_dir = os.path.dirname(xhpl_bin)
         hpl_dat_filename = "{0}/HPL.dat".format(xhpl_bin_dir)
-        logger.debug(util.get_debug({
+        logger.debug(testvar.get_debug({
             "N": self._N,
             "NB": self._NB,
             "P": self._P,
             "Q": self._Q,
         }))
         logger.debug("HPL.dat: {0}".format(hpl_dat_filename))
-        util.write_file(hpl_dat_filename, self._hpl_dat, 'w')
+        fileio.write_file(hpl_dat_filename, self._hpl_dat, 'w')
 
-        logger.debug(util.get_debug(self._cmd))
+        logger.debug(testvar.get_debug(self._cmd))
         logger.info("Starting XHPL")
         logger.info("{0:<11}{1:<8}{2:>4} {3:<10}{4:<10}".format(
             "STATUS", "TEST", "RUN", "TIME", "GFLOPS"
@@ -282,7 +285,7 @@ class XHPL:
                 run = count,
             )
             try:
-                dict_ = util.get_shell_cmd(self._cmd, cwd = xhpl_bin_dir)
+                dict_ = command.get_shell_cmd(self._cmd, cwd = xhpl_bin_dir)
             except KeyboardInterrupt:
                 break
             else:
@@ -348,14 +351,14 @@ class XHPL:
         if status in ["STARTED", "FAILED", "ERROR"]:
             format_row = "{0:<20}{1:<8}{2:>4}"
             format_vars = (
-                util.add_colour(status, status_colour[status]),
+                formattext.add_colour(status, status_colour[status]),
                 kwargs["test_name"],
                 "#" + str(kwargs["run"]),
             )
         elif status == "PASSED":
             format_row = "{0:<20}{1:<8}{2:>4} {3:<10}{4:<10}"
             format_vars = (
-                util.add_colour(status, status_colour[status]),
+                formattext.add_colour(status, status_colour[status]),
                 kwargs["test_name"],
                 "#" + str(kwargs["run"]),
                 kwargs["time"],

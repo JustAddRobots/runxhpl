@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 """
-This module is the CLI front-end for the standardised XHPL.
+This module is the CLI front-end for the standardised XHPL Stress Test.
 """
 
 import argparse
@@ -12,8 +12,9 @@ import sys
 import time
 
 from engcommon import clihelper
+from engcommon import formattext
 from engcommon import hardware
-from engcommon import util
+from engcommon import log
 from engcommon.constants import _const as CONSTANTS
 from runxhpl import xhpl
 
@@ -28,7 +29,7 @@ def get_command(args):
         args (dict): Arguments.
     """
     parser = argparse.ArgumentParser(
-        description = "XHPL stress test"
+        description = "XHPL Stress Test"
     )
     parser.add_argument(
         '--clear-sel',
@@ -123,12 +124,12 @@ def run(args):
 
     # Show logs
     logger.info("{0}: {1}".format(
-        util.add_colour("Status", "magenta"),
+        formattext.add_colour("Status", "magenta"),
         my_xhpl.status,
     ))
     logger.info("Mean Gflops: {0}".format(my_xhpl.gflops_mean))
     my_cli.write_logs(runs_dict, 'w')
-    runs_blob = util.get_formatted_logs(runs_dict)
+    runs_blob = log.get_formatted_logs(runs_dict)
     my_cli.print_logdir()
     logger.info("Done.\n")
     return None
