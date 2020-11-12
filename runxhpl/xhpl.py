@@ -5,8 +5,8 @@ This module facilitates configuring and running the XHPL stress test.
 
     Typical Usage:
 
-    my_xhpl = XHPL(30)
-    runs = my_xhpl.run_xhpl(10)
+    my_xhpl = XHPL(mem_percent = 30)
+    runs = my_xhpl.run_xhpl(num_runs = 10)
 """
 
 import logging
@@ -60,12 +60,20 @@ class XHPL:
         time_mean: Mean time (s) for runs.
     """
 
-    def __init__(self, mem_percent):
+    def __init__(self, **kwargs):
         """Init XHPL.
 
-        Args:
+        **kwargs:
             mem_percent (int): Percentage of memory requested.
         """
+        if "num_percent" not in kwargs.items():
+            try:
+                raise TypeError("Missing keyword argument: 'num_percent'")
+            except TypeError:
+                logger.error("Keyword Argument Missing Error"
+                logger.debug(testvar.get_debug(kwargs))
+                raise
+
         self._mem_percent = self._get_mem_percent(mem_percent)
         self._num_cores = self._get_num_cores()
         self._mem_free = self._get_mem_free()
@@ -233,15 +241,27 @@ class XHPL:
         )
         return cmd
 
-    def _run_xhpl(self, num_runs):
+    def _run_xhpl(self, **kwargs):
         """Run XHPL and get output.
 
         Args:
-            runs (int): Number of runs.
+            None
+
+        **kwargs:
+            runs (int): Number of runs. (required)
 
         Returns:
             runs_dict (dict): STDOUT of run keyed by run number.
         """
+
+        if "runs" not in kwargs.items():
+            try:
+                raise TypeError("Missing keyword argument: 'runs'")
+            except TypeError:
+                logger.error("Keyword Argument Missing Error"
+                logger.debug(testvar.get_debug(kwargs))
+                raise
+            
         GB = 1024 * 1024 * 1024
         logger.debug("CORES: {0}, MEM: {1} GB".format(
             self._num_cores,
