@@ -70,11 +70,11 @@ class XHPL:
             try:
                 raise TypeError("Missing keyword argument: 'num_percent'")
             except TypeError:
-                logger.error("Keyword Argument Missing Error"
+                logger.error("Keyword Argument Missing Error")
                 logger.debug(testvar.get_debug(kwargs))
                 raise
 
-        self._mem_percent = self._get_mem_percent(mem_percent)
+        self._mem_percent = self._get_mem_percent(kwargs["mem_percent"])
         self._num_cores = self._get_num_cores()
         self._mem_free = self._get_mem_free()
         self._mem_xhpl = self._get_mem_xhpl()
@@ -154,6 +154,14 @@ class XHPL:
             logger.error("Invalid Integer Error")
             logger.debug(testvar.get_debug(mem_percent))
         return mem_percent
+
+    def _get_num_runs(self, num_runs):
+        try:
+            int(num_runs)
+        except ValueError:
+            logger.error("Invalid Integer Error")
+            logger.debug(testvar.get_debug(num_runs))
+        return num_runs
 
     def _get_num_cores(self):
         return hardware.get_cpu_core_count()
@@ -254,14 +262,15 @@ class XHPL:
             runs_dict (dict): STDOUT of run keyed by run number.
         """
 
-        if "runs" not in kwargs.items():
+        if "num_runs" not in kwargs.items():
             try:
-                raise TypeError("Missing keyword argument: 'runs'")
+                raise TypeError("Missing keyword argument: 'num_runs'")
             except TypeError:
-                logger.error("Keyword Argument Missing Error"
+                logger.error("Keyword Argument Missing Error")
                 logger.debug(testvar.get_debug(kwargs))
                 raise
-            
+        num_runs = self._get_num_runs(kwargs["num_runs"])
+
         GB = 1024 * 1024 * 1024
         logger.debug("CORES: {0}, MEM: {1} GB".format(
             self._num_cores,

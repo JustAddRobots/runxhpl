@@ -15,13 +15,13 @@ setup(
     name = "runxhpl",
     version = pkgversion,
     description = "High Performance Linpack Stress Test",
-    url = ("git+ssh://git@{0}.github.com/"
-           "JustAddRobots/{0}.git@{1}").format(name, pkgversion),
+    url = ("git+ssh://git@runxhpl.github.com/"
+           "JustAddRobots/runxhpl.git@{0}").format(pkgversion),
     author = "Roderick Constance",
-    author_email = "justaddrobots@icloud.com"
+    author_email = "justaddrobots@icloud.com",
     license = "Private",
     packages = [
-        "{0}".format(name),
+        "runxhpl",
     ],
     package_data = {
         "runxhpl": [
