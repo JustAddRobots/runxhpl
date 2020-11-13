@@ -1,0 +1,5 @@
+include README.rst
+include VERSION
+include bin/xhpl-x86_64
+include bin/xhpl-aarch64
+include bin/xhpl-ppc64le

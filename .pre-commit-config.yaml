@@ -1,0 +1,16 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+# See https://github.com/c4urself/bump2version/issues/124
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v2.4.0
+    hooks:
+    -   id: end-of-file-fixer
+        exclude: ".bumpversion.cfg"
+    -   id: check-yaml
+    -   id: check-added-large-files
+        args: ["--maxkb=2048"]
+-   repo: https://github.com/PyCQA/flake8
+    rev: 3.8.3
+    hooks:
+    -   id: flake8
