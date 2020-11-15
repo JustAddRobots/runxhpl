@@ -53,7 +53,7 @@ def get_command(args):
         '-m', '--mem',
         action = 'store',
         type = int,
-        default = CONSTANTS().BURN_MEM_PCT,
+        default = CONSTANTS().XHPL_MEM_PCT,
         help = 'set memory percentage',
     )
     parser.add_argument(

@@ -10,7 +10,7 @@
 # The above one-liner can be included in a Jenkins freestyle or pipeline project.
 
 ARCH        := $$(uname -m)
-NAME        := $(SERVER).local:5000/runxhpl
+NAME        := $(SERVER)/runxhpl
 HASHLONG    := $$(git log -1 --pretty=%H --no-merges)
 HASHSHORT   := $$(git log -1 --pretty=%h --no-merges)
 TAG         := $$(git describe --tags --abbrev=0)
@@ -21,9 +21,9 @@ IMGSHORT    := ${NAME}:${TAG}-${ARCH}
 all: build push
 
 build:
-    @docker build -t ${IMGLONG} --build-arg GIT_COMMIT=${HASHSHORT} --no-cache .
-    @docker tag ${IMGLONG} ${IMGSHORT}
+	@docker build -t ${IMGLONG} --build-arg GIT_COMMIT=${HASHSHORT} --no-cache .
+	@docker tag ${IMGLONG} ${IMGSHORT}
 
 push:
-    @docker push ${IMGLONG}
-    @docker push ${IMGSHORT}
+	@docker push ${IMGLONG}
+	@docker push ${IMGSHORT}

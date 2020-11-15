@@ -2,7 +2,6 @@
 
 FROM hosaka.local:5000/centos:7.8-x86_64
 WORKDIR /
-COPY ./repofile/* /etc/yum.repos.d/
 ENV TZ=America/Los_Angeles
 ENV DEBUG=""
 ENV RUNS=""
@@ -11,7 +10,7 @@ ENV LOGID="${LOGID}"
 ENV PREFIX="${PREFIX}"
 ENV SERVER="${SERVER}"
 ARG GIT_COMMIT="master"
-ENV PATH="${PATH}:/opt/runxhpl/bin"
+ENV PATH="${PATH}:/root/.local/bin:/opt/runxhpl/bin"
 
 # Copy binaries used for RUN
 
@@ -32,16 +31,17 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && \
     which \
     && \
     yum clean all && rm -rf /var/cache/yum && \
+    echo "11.22.33.166 hosaka.local" >> /etc/hosts && \
     mkdir -p /root/.ssh && \
     wget -nv -r -l1 -np -nH --cut-dirs=3 --reject index* -P /root/.ssh/ http://hosaka.local/ark/git/DeployKeys/ && \
     chmod 600 /root/.ssh/* && \
-    wget -O /tmp/runxhpl.tar.bz2 http://hosaka.local/ark/dockers/pkg/runxhpl.tar.bz2
-    tar xjf /tmp/runxhpl.tar.bz2 -C /opt/
-    echo "/opt/runxhpl/lib" > /etc/ld.so.conf.d/runxhpl.conf
-    ldconfig
+    wget -O /tmp/runxhpl.tar.bz2 http://hosaka.local/ark/docker/pkgs/runxhpl.tar.bz2 && \
+    tar xjf /tmp/runxhpl.tar.bz2 -C /opt/ && \
+    echo "/opt/runxhpl/lib" > /etc/ld.so.conf.d/runxhpl.conf && \
+    ldconfig && \
     python3 -m pip install --upgrade pip && \
     python3 -m pip install --upgrade setuptools && \
-    python3 -m pip install -L --force-reinstall git+ssh://git@runxhpl.github.com/JustAddRobots/runxhpl.git@$GIT_COMMIT && \
+    python3 -m pip install --force-reinstall git+ssh://git@runxhpl.github.com/JustAddRobots/runxhpl.git@$GIT_COMMIT && \
     rm -rf ~/.cache/pip
 
 # Copy binaries
@@ -55,7 +55,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && \
 
 # COPY --from=builder \
 #     /usr/lib64/openmpi3/ \
-#     /usr/lib64/openmpi3/
+#     /usr/lib68/openmpi3/
 # 
 # COPY --from=builder \
 #     /usr/lib64/ld-linux-x86-64.so.2 \
