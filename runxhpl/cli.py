@@ -79,7 +79,7 @@ def get_command(args):
         '-t', '--timeout',
         action = 'store',
         type = int,
-        default = CONSTANTS().BURN_TIMEOUT,
+        default = CONSTANTS().XHPL_TIMEOUT,
         help = 'set timeout (hours)',
     )
     parser.add_argument(
