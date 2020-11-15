@@ -1,6 +1,2 @@
 include README.rst
 include VERSION
-include bin/mpirun
-include bin/mpiexec.hydra
-include bin/xhpl-x86_64-avx
-include bin/xhpl-x86_64-core-avx512

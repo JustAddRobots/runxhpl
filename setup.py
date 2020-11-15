@@ -23,15 +23,6 @@ setup(
     packages = [
         "runxhpl",
     ],
-    package_data = {
-        "runxhpl": [
-            "bin/mpirun",
-            "bin/mpiexec.hydra",
-            "bin/xhpl-x86_64-avx",
-            "bin/xhpl-x86_64-core-avx512",
-        ],
-    },
-    include_package_data = True,
     install_requires = [
         "docker",
         "engcommon @ git+ssh://git@engcommon.github.com/JustAddRobots/engcommon.git",
