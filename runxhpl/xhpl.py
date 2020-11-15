@@ -513,7 +513,7 @@ def get_xhpl_cpu_optimisations():
     # https://en.wikipedia.org/wiki/Advanced_Vector_Extensions
 
     compiler_opts = {
-        "common-avx512": [ 
+        "common-avx512": [
             "avx512f",
             "avx512cd",
             "avx2",
@@ -538,14 +538,15 @@ def get_xhpl_cpu_optimisations():
         "avx": [
             "avx",
         ]
+    }
 
     build_opt = None
-    avx_flags = hardware.get_cpu_flags_with_prefix("avx"):
+    avx_flags = hardware.get_cpu_flags_with_prefix("avx")
     for opt, instructions in compiler_opts.items:
         if set(instructions).issubset(set(avx_flags)):
             build_opt = opt
             break
-            
+
     testvar.check_null(build_opt)  # Any modern Intel CPU has at least "avx"
     return build_opt
 
