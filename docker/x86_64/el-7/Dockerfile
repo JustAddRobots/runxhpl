@@ -11,7 +11,7 @@ ENV LOGID="${LOGID}"
 ENV PREFIX="${PREFIX}"
 ENV SERVER="${SERVER}"
 ARG GIT_COMMIT="master"
-ENV PATH="${PATH}:/usr/lib64/openmpi3/bin"
+ENV PATH="${PATH}:/opt/runxhpl/bin"
 
 # Copy binaries used for RUN
 
@@ -35,6 +35,10 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && \
     mkdir -p /root/.ssh && \
     wget -nv -r -l1 -np -nH --cut-dirs=3 --reject index* -P /root/.ssh/ http://hosaka.local/ark/git/DeployKeys/ && \
     chmod 600 /root/.ssh/* && \
+    wget -O /tmp/runxhpl.tar.bz2 http://hosaka.local/ark/dockers/pkg/runxhpl.tar.bz2
+    tar xjf /tmp/runxhpl.tar.bz2 -C /opt/
+    echo "/opt/runxhpl/lib" > /etc/ld.so.conf.d/runxhpl.conf
+    ldconfig
     python3 -m pip install --upgrade pip && \
     python3 -m pip install --upgrade setuptools && \
     python3 -m pip install -L --force-reinstall git+ssh://git@runxhpl.github.com/JustAddRobots/runxhpl.git@$GIT_COMMIT && \
