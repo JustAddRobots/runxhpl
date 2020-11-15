@@ -23,12 +23,6 @@ setup(
     packages = [
         "runxhpl",
     ],
-    package_data = {
-        "runxhpl": [
-            "bin/xhpl-x86_64-avx512",
-        ],
-    },
-    include_package_data = True,
     install_requires = [
         "docker",
         "engcommon @ git+ssh://git@engcommon.github.com/JustAddRobots/engcommon.git",

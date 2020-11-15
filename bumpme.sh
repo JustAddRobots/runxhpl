@@ -83,7 +83,7 @@ done
 
 if [[ $PART == "" ]]; then usage; fi
 
-# Set log/lockfiles based on timesatamp
+# Set log/lockfiles based on timestamp
 TIMESTAMP=$(date +%Y%m%d.%H%M%S)
 LOGFILE="/tmp/bumpme.$TIMESTAMP.log"
 LOCKFILE="/tmp/bumpme.$TIMESTAMP.lock"
@@ -131,7 +131,7 @@ set_versions() {
 
 # Add CHANGELOG, amend commit, move version tag to amended commit
 # gitchangelog requires a pre-existing tagged commit or the section
-# name will be "Unreleased.
+# name will be "Unreleased".
 add_changelog() {
     if [[ $VERBOSE -eq 1 ]]; then echo "INFO: add_changelog"; fi
     MSG_CHANGELOG="$MSG, Added CHANGELOG"
