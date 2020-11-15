@@ -115,7 +115,7 @@ def run(args):
         logger.debug("Clearing SEL")
         hardware.clear_sel()
 
-    my_xhpl = xhpl.XHPL(mem_pct)
+    my_xhpl = xhpl.XHPL(mem_percent = mem_pct)
 
     # Run XHPL
     # time_start = time.strftime('%Y-%m-%d %H:%M:%S')

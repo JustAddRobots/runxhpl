@@ -66,9 +66,9 @@ class XHPL:
         **kwargs:
             mem_percent (int): Percentage of memory requested.
         """
-        if "num_percent" not in kwargs.items():
+        if "mem_percent" not in kwargs.items():
             try:
-                raise TypeError("Missing keyword argument: 'num_percent'")
+                raise TypeError("Missing keyword argument: 'mem_percent'")
             except TypeError:
                 logger.error("Keyword Argument Missing Error")
                 logger.debug(testvar.get_debug(kwargs))
