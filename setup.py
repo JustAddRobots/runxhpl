@@ -25,7 +25,10 @@ setup(
     ],
     package_data = {
         "runxhpl": [
-            "bin/xhpl-x86_64-avx512",
+            "bin/mpirun",
+            "bin/mpiexec.hydra",
+            "bin/xhpl-x86_64-avx",
+            "bin/xhpl-x86_64-core-avx512",
         ],
     },
     include_package_data = True,

@@ -225,22 +225,22 @@ class XHPL:
         Returns:
             cmd (str): XHPL command.
         """
-        # The docker container uses OpenMPI. Otherwise the user is responsible
+        # The docker container uses IntelMPI. Otherwise the user is responsible
         # for MPI installation and $PATH resolution for mpirun.
         cmd_mpirun = "mpirun"
         arch = hardware.get_arch()
-        if arch in ["aarch64", "ppc64le"]:
-            cmd_options = (
-                "--allow-run-as-root -mca btl vader,self "
-                "-mca btl_vader_single_copy_mechanism none"
-            )
-        elif arch in ["x86_64"]:
+        if arch in ["x86_64"]:
             cmd_options = (
                 "--allow-run-as-root -mca btl_vader_single_copy_mechanism "
                 "none"
             )
+        else:
+            pass  # This POC only supports x86_64
 
         cmd_xhpl = "xhpl-{0}".format(arch)
+        if hardware.get_cpu_vendor() == "intel":
+            cmd_xhpl = "{0}-{1}".format(cmd_xhpl, get_xhpl_cpu_optimisations())
+
         cmd = "{0} {1} -np {2} {3}".format(
             cmd_mpirun,
             cmd_options,
@@ -497,29 +497,61 @@ HPL.out      output file name (if any)
     return hpl_dat_tmpl
 
 
-def get_xhpl_cpu_extension():
-    """Get XHPL CPU extensions.
+def get_xhpl_cpu_optimisations():
+    """Get XHPL CPU optimisations.
 
-    Get the CPU SIMD for optimised XHPL ("generic" for non-optimised).
-    *** Unused until we build optimised XHPL binaries. ***
+    Get the CPU SIMD for optimised XHPL.
+    Currently only supports Intel processors.
 
     Args:
         None
 
     Returns:
-        ext (str): CPU extension.
+        build_opt (str): CPU optimisation.
     """
-    ext = "generic"
-    # May be able to get rid of avx if avx512 XHPL is
-    # backwards compatible.
-    if hardware.get_cpu_extensions_with_prefix("avx512"):
-        ext = "avx512"
-    elif hardware.get_cpu_extensions_with_prefix("avx"):
-        ext = "avx"
-    elif hardware.get_cpu_extensions_with_prefix("fma"):
-        ext = "fma"
+    # https://software.intel.com/content/www/us/en/develop/articles/performance-tools-for-software-developers-intel-compiler-options-for-sse-generation-and-processor-specific-optimizations.html
+    # https://en.wikipedia.org/wiki/Advanced_Vector_Extensions
 
-    return ext
+    compiler_opts = {
+        "common-avx512": [ 
+            "avx512f",
+            "avx512cd",
+            "avx2",
+            "avx",
+        ],
+        "core-avx512": [
+            "avx512f",
+            "avx512cd",
+            "avx512dq",
+            "avx512bw",
+            "avx512vl",
+            "avx2",
+            "avx",
+        ],
+        "core-avx2": [
+            "avx2",
+            "avx",
+        ],
+        "core-avx-i": [
+            "avx",
+        ],
+        "avx": [
+            "avx",
+        ]
+
+    build_opt = None
+    avx_flags = hardware.get_cpu_flags_with_prefix("avx"):
+    for opt, instructions in compiler_opts.items:
+        if set(instructions).issubset(set(avx_flags)):
+            build_opt = opt
+            break
+            
+    testvar.check_null(build_opt)  # Any modern Intel CPU has at least "avx"
+    return build_opt
+
+
+def get_xhpl_cpu_optimizations():
+    return get_xhpl_cpu_optimisations()
 
 
 def get_PQ(num_cores):
