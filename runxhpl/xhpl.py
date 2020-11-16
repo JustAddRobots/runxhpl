@@ -13,7 +13,7 @@ import logging
 import math
 import numpy
 import os
-import pkg_resources
+# import pkg_resources
 import re
 import statistics
 import time
@@ -283,10 +283,11 @@ class XHPL:
         logger.debug("Generating HPL.dat")
 
         # Write HPL.dat to the same dir as xhpl binary
-        xhpl_bin = pkg_resources.resource_stream(
-            __name__,
-            "bin/xhpl-{0}".format(hardware.get_arch()),
-        ).name
+#         xhpl_bin = pkg_resources.resource_stream(
+#             __name__,
+#             "bin/xhpl-{0}".format(hardware.get_arch()),
+#         ).name
+        xhpl_bin = command.get_shell_command("which {0}".format(self.cmd))
         xhpl_bin_dir = os.path.dirname(xhpl_bin)
         hpl_dat_filename = "{0}/HPL.dat".format(xhpl_bin_dir)
         logger.debug(testvar.get_debug({
@@ -513,18 +514,18 @@ def get_xhpl_cpu_optimisations():
     # https://en.wikipedia.org/wiki/Advanced_Vector_Extensions
 
     compiler_opts = {
-        "common-avx512": [
-            "avx512f",
-            "avx512cd",
-            "avx2",
-            "avx",
-        ],
         "core-avx512": [
             "avx512f",
             "avx512cd",
             "avx512dq",
             "avx512bw",
             "avx512vl",
+            "avx2",
+            "avx",
+        ],
+        "common-avx512": [
+            "avx512f",
+            "avx512cd",
             "avx2",
             "avx",
         ],
