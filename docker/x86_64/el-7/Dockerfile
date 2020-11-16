@@ -10,7 +10,7 @@ ENV LOGID="${LOGID}"
 ENV PREFIX="${PREFIX}"
 ENV SERVER="${SERVER}"
 ARG GIT_COMMIT="master"
-ENV PATH="${PATH}:/root/.local/bin:/opt/runxhpl/bin"
+ENV PATH="${PATH}:/root/.local/bin:/opt/runxhpl/bin:/opt/runxhpl/impi/bin"
 
 # Copy binaries used for RUN
 
@@ -37,7 +37,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && \
     chmod 600 /root/.ssh/* && \
     wget -O /tmp/runxhpl.tar.bz2 http://hosaka.local/ark/docker/pkgs/runxhpl.tar.bz2 && \
     tar xjf /tmp/runxhpl.tar.bz2 -C /opt/ && \
-    echo "/opt/runxhpl/lib" > /etc/ld.so.conf.d/runxhpl.conf && \
+    echo "/opt/runxhpl/imkl/lib\n/opt/runxhpl/impi/lib" > /etc/ld.so.conf.d/runxhpl.conf && \
     ldconfig && \
     python3 -m pip install --upgrade pip && \
     python3 -m pip install --upgrade setuptools && \

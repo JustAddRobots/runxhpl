@@ -227,7 +227,7 @@ class XHPL:
         """
         # The docker container uses IntelMPI. Otherwise the user is responsible
         # for MPI installation and $PATH resolution for mpirun.
-        cmd_mpirun = "mpiexec.hydra"
+        cmd_mpirun = "mpirun"
         arch = hardware.get_arch()
         if arch in ["x86_64"]:
             cmd_options = ""
@@ -284,8 +284,11 @@ class XHPL:
 #             __name__,
 #             "bin/xhpl-{0}".format(hardware.get_arch()),
 #         ).name
-        dict_ = command.get_shell_cmd("which xhpl-x86_64-core-avx512".format(self.cmd))
-        xhpl_bin = dict_["stdout"].strip()
+        regex_xhpl = r"xhpl-[a-zA-Z0-9_-]+"
+        match = re.search(regex_xhpl, self.cmd)
+        cmd_xhpl = m.groups()[0]
+        dict_ = command.get_shell_cmd("which {0}".format(xhpl_bin))
+        cmd_xhpl_path = dict_["stdout"].strip()
         xhpl_bin_dir = os.path.dirname(xhpl_bin)
         hpl_dat_filename = "{0}/HPL.dat".format(xhpl_bin_dir)
         logger.debug(testvar.get_debug({
