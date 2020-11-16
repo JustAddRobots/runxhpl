@@ -119,7 +119,7 @@ def run(args):
 
     # Run XHPL
     # time_start = time.strftime('%Y-%m-%d %H:%M:%S')
-    runs_dict = my_xhpl.run_xhpl(runs)
+    runs_dict = my_xhpl.run_xhpl(num_runs = runs)
     # time_end = time.strftime('%Y-%m-%d %H:%M:%S')
 
     # Show logs

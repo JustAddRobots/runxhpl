@@ -351,8 +351,8 @@ class XHPL:
             self._status = "FAILED"
         return runs_dict
 
-    def run_xhpl(self, num_runs):
-        return self._run_xhpl(num_runs)
+    def run_xhpl(self, **kwargs):
+        return self._run_xhpl(**kwargs)
 
     def _print_status(self, **kwargs):
         """Print status line of XHPL run.
