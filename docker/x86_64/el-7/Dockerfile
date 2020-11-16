@@ -72,7 +72,7 @@ COPY --from=builder \
 
 COPY --from=builder \
     /usr/lib64/openmpi3/ \
-    /usr/lib68/openmpi3/
+    /usr/lib64/openmpi3/
 
 COPY --from=builder \
     /usr/lib64/ld-linux-x86-64.so.2 \
