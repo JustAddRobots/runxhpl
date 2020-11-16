@@ -2,12 +2,12 @@
 
 FROM hosaka.local:5000/centos:7.8-x86_64 as builder
 WORKDIR /
+COPY ./repofile/* /etc/yum.repos.d/
 ENV TZ=America/Los_Angeles
 
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && \
     echo $TZ > /etc/timezone && \
     yum -y install \
-    epel-release \
     git \
     infinipath-psm-devel \
     iproute \
