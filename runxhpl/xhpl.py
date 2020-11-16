@@ -66,7 +66,7 @@ class XHPL:
         **kwargs:
             mem_percent (int): Percentage of memory requested.
         """
-        if "mem_percent" not in kwargs.items():
+        if "mem_percent" not in kwargs.keys():
             try:
                 raise TypeError("Missing keyword argument: 'mem_percent'")
             except TypeError:
@@ -262,7 +262,7 @@ class XHPL:
             runs_dict (dict): STDOUT of run keyed by run number.
         """
 
-        if "num_runs" not in kwargs.items():
+        if "num_runs" not in kwargs.keys():
             try:
                 raise TypeError("Missing keyword argument: 'num_runs'")
             except TypeError:
