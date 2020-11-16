@@ -542,7 +542,7 @@ def get_xhpl_cpu_optimisations():
 
     build_opt = None
     avx_flags = hardware.get_cpu_flags_with_prefix("avx")
-    for opt, instructions in compiler_opts.items:
+    for opt, instructions in compiler_opts.items():
         if set(instructions).issubset(set(avx_flags)):
             build_opt = opt
             break
