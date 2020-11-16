@@ -227,12 +227,10 @@ class XHPL:
         """
         # The docker container uses IntelMPI. Otherwise the user is responsible
         # for MPI installation and $PATH resolution for mpirun.
-        cmd_mpirun = "mpirun"
+        cmd_mpirun = "mpiexec.hydra"
         arch = hardware.get_arch()
         if arch in ["x86_64"]:
             cmd_options = (
-                "--allow-run-as-root -mca btl_vader_single_copy_mechanism "
-                "none"
             )
         else:
             pass  # This POC only supports x86_64
