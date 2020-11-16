@@ -230,8 +230,7 @@ class XHPL:
         cmd_mpirun = "mpiexec.hydra"
         arch = hardware.get_arch()
         if arch in ["x86_64"]:
-            cmd_options = (
-            )
+            cmd_options = ""
         else:
             pass  # This POC only supports x86_64
 
@@ -285,7 +284,7 @@ class XHPL:
 #             __name__,
 #             "bin/xhpl-{0}".format(hardware.get_arch()),
 #         ).name
-        xhpl_bin = command.get_shell_cmd("which {0}".format(self.cmd))
+        xhpl_bin = command.get_shell_cmd("which xhpl-x86_64-core-avx512".format(self.cmd))
         xhpl_bin_dir = os.path.dirname(xhpl_bin)
         hpl_dat_filename = "{0}/HPL.dat".format(xhpl_bin_dir)
         logger.debug(testvar.get_debug({
