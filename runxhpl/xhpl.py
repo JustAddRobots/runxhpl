@@ -287,7 +287,7 @@ class XHPL:
 #             __name__,
 #             "bin/xhpl-{0}".format(hardware.get_arch()),
 #         ).name
-        xhpl_bin = command.get_shell_command("which {0}".format(self.cmd))
+        xhpl_bin = command.get_shell_cmd("which {0}".format(self.cmd))
         xhpl_bin_dir = os.path.dirname(xhpl_bin)
         hpl_dat_filename = "{0}/HPL.dat".format(xhpl_bin_dir)
         logger.debug(testvar.get_debug({
