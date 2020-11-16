@@ -13,7 +13,7 @@ import logging
 import math
 import numpy
 import os
-# import pkg_resources
+import pkg_resources
 import re
 import statistics
 import time
@@ -230,14 +230,14 @@ class XHPL:
         cmd_mpirun = "mpirun"
         arch = hardware.get_arch()
         if arch in ["x86_64"]:
-            cmd_options = ""
+            cmd_options = (
+                "--allow-run-as-root -mca btl_vader_single_copy_mechanism "
+                "none"
+            )
         else:
             pass  # This POC only supports x86_64
 
         cmd_xhpl = "xhpl-{0}".format(arch)
-        if hardware.get_cpu_vendor() == "intel":
-            cmd_xhpl = "{0}-{1}".format(cmd_xhpl, get_xhpl_cpu_optimisations())
-
         cmd = "{0} {1} -np {2} {3}".format(
             cmd_mpirun,
             cmd_options,
@@ -280,15 +280,10 @@ class XHPL:
         logger.debug("Generating HPL.dat")
 
         # Write HPL.dat to the same dir as xhpl binary
-#         xhpl_bin = pkg_resources.resource_stream(
-#             __name__,
-#             "bin/xhpl-{0}".format(hardware.get_arch()),
-#         ).name
-        regex_xhpl = r"xhpl-[a-zA-Z0-9_-]+"
-        match = re.search(regex_xhpl, self.cmd)
-        cmd_xhpl = m.groups()[0]
-        dict_ = command.get_shell_cmd("which {0}".format(xhpl_bin))
-        cmd_xhpl_path = dict_["stdout"].strip()
+        xhpl_bin = pkg_resources.resource_stream(
+            __name__,
+            "bin/xhpl-{0}".format(hardware.get_arch()),
+        ).name
         xhpl_bin_dir = os.path.dirname(xhpl_bin)
         hpl_dat_filename = "{0}/HPL.dat".format(xhpl_bin_dir)
         logger.debug(testvar.get_debug({
