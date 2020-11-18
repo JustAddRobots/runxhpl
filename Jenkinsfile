@@ -42,7 +42,7 @@ pipeline {
             steps {
                 echo "PATH: $PATH"
                 sh("""echo 'sh PATH: $PATH' """)
-                sh("""which make""")
+                sh 'make'
             }
         }
         stage ('Build Docker Container') {
