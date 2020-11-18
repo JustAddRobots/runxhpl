@@ -41,6 +41,7 @@ pipeline {
         stage ('echo $PATH') {
             steps {
                 echo "PATH: $PATH"
+                sh("""echo 'sh PATH: $PATH' """)
             }
         }
         stage ('Build Docker Container') {
