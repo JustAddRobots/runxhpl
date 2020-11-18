@@ -14,7 +14,7 @@ repos:
     rev: 3.8.3
     hooks:
     -   id: flake8
--   repo: https://github.com/PeterMosmans/jenkinslint
-    rev: master
-    hooks:
-    - id: jenkinslint
+# -   repo: https://github.com/PeterMosmans/jenkinslint
+#     rev: master
+#     hooks:
+#     - id: jenkinslint
