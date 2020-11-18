@@ -38,6 +38,11 @@ pipeline {
                 echo "TAG_HASH: ${TAG_HASH}"
             }
         }
+        stage ('echo $PATH') {
+            steps {
+                echo "PATH: $PATH"
+            }
+        }
         stage ('Build Docker Container') {
             steps {
                 script {
