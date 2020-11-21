@@ -53,7 +53,7 @@ def get_command(args):
         '-m', '--mem',
         action = 'store',
         type = int,
-        default = CONSTANTS().BURN_MEM_PCT,
+        default = CONSTANTS().XHPL_MEM_PCT,
         help = 'set memory percentage',
     )
     parser.add_argument(
@@ -79,7 +79,7 @@ def get_command(args):
         '-t', '--timeout',
         action = 'store',
         type = int,
-        default = CONSTANTS().BURN_TIMEOUT,
+        default = CONSTANTS().XHPL_TIMEOUT,
         help = 'set timeout (hours)',
     )
     parser.add_argument(
@@ -115,11 +115,11 @@ def run(args):
         logger.debug("Clearing SEL")
         hardware.clear_sel()
 
-    my_xhpl = xhpl.XHPL(mem_pct)
+    my_xhpl = xhpl.XHPL(mem_percent = mem_pct)
 
     # Run XHPL
     # time_start = time.strftime('%Y-%m-%d %H:%M:%S')
-    runs_dict = my_xhpl.run_xhpl(runs)
+    runs_dict = my_xhpl.run_xhpl(num_runs = runs)
     # time_end = time.strftime('%Y-%m-%d %H:%M:%S')
 
     # Show logs

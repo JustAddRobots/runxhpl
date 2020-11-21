@@ -66,9 +66,9 @@ class XHPL:
         **kwargs:
             mem_percent (int): Percentage of memory requested.
         """
-        if "num_percent" not in kwargs.items():
+        if "mem_percent" not in kwargs.keys():
             try:
-                raise TypeError("Missing keyword argument: 'num_percent'")
+                raise TypeError("Missing keyword argument: 'mem_percent'")
             except TypeError:
                 logger.error("Keyword Argument Missing Error")
                 logger.debug(testvar.get_debug(kwargs))
@@ -225,8 +225,8 @@ class XHPL:
         Returns:
             cmd (str): XHPL command.
         """
-        # The docker container uses IntelMPI. Otherwise the user is responsible
-        # for MPI installation and $PATH resolution for mpirun.
+        # The docker container uses OpenMPI. Otherwise the user is responsible
+        # for MPI installation and $PATH resolution of mpirun.
         cmd_mpirun = "mpirun"
         arch = hardware.get_arch()
         if arch in ["x86_64"]:
@@ -238,9 +238,6 @@ class XHPL:
             pass  # This POC only supports x86_64
 
         cmd_xhpl = "xhpl-{0}".format(arch)
-        if hardware.get_cpu_vendor() == "intel":
-            cmd_xhpl = "{0}-{1}".format(cmd_xhpl, get_xhpl_cpu_optimisations())
-
         cmd = "{0} {1} -np {2} {3}".format(
             cmd_mpirun,
             cmd_options,
@@ -262,13 +259,14 @@ class XHPL:
             runs_dict (dict): STDOUT of run keyed by run number.
         """
 
-        if "num_runs" not in kwargs.items():
+        if "num_runs" not in kwargs.keys():
             try:
                 raise TypeError("Missing keyword argument: 'num_runs'")
             except TypeError:
                 logger.error("Keyword Argument Missing Error")
                 logger.debug(testvar.get_debug(kwargs))
                 raise
+
         num_runs = self._get_num_runs(kwargs["num_runs"])
 
         GB = 1024 * 1024 * 1024
@@ -317,7 +315,7 @@ class XHPL:
                 dict_ = command.get_shell_cmd(self._cmd, cwd = xhpl_bin_dir)
             except KeyboardInterrupt:
                 break
-            else:
+            else:  # Append run metrics to list, average, and display
                 (
                     passfail,
                     xhpl_time,
@@ -351,8 +349,8 @@ class XHPL:
             self._status = "FAILED"
         return runs_dict
 
-    def run_xhpl(self, num_runs):
-        return self._run_xhpl(num_runs)
+    def run_xhpl(self, **kwargs):
+        return self._run_xhpl(**kwargs)
 
     def _print_status(self, **kwargs):
         """Print status line of XHPL run.
@@ -513,18 +511,18 @@ def get_xhpl_cpu_optimisations():
     # https://en.wikipedia.org/wiki/Advanced_Vector_Extensions
 
     compiler_opts = {
-        "common-avx512": [
-            "avx512f",
-            "avx512cd",
-            "avx2",
-            "avx",
-        ],
         "core-avx512": [
             "avx512f",
             "avx512cd",
             "avx512dq",
             "avx512bw",
             "avx512vl",
+            "avx2",
+            "avx",
+        ],
+        "common-avx512": [
+            "avx512f",
+            "avx512cd",
             "avx2",
             "avx",
         ],
@@ -542,7 +540,7 @@ def get_xhpl_cpu_optimisations():
 
     build_opt = None
     avx_flags = hardware.get_cpu_flags_with_prefix("avx")
-    for opt, instructions in compiler_opts.items:
+    for opt, instructions in compiler_opts.items():
         if set(instructions).issubset(set(avx_flags)):
             build_opt = opt
             break

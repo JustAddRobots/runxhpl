@@ -15,14 +15,19 @@ setup(
     name = "runxhpl",
     version = pkgversion,
     description = "High Performance Linpack Stress Test",
-    url = ("git+ssh://git@runxhpl.github.com/"
-           "JustAddRobots/runxhpl.git@{0}").format(pkgversion),
+    url = "https://github.com/JustAddRobots/runxhpl",
     author = "Roderick Constance",
     author_email = "justaddrobots@icloud.com",
     license = "Private",
     packages = [
         "runxhpl",
     ],
+    package_data = {
+        "runxhpl": [
+            "bin/xhpl-x86_64",
+        ],
+    },
+    include_package_data = True,
     install_requires = [
         "docker",
         "engcommon @ git+ssh://git@engcommon.github.com/JustAddRobots/engcommon.git",
