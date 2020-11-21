@@ -1,5 +1,8 @@
 #!/usr/bin/env groovy
 
+// This Jenkinsfile automatically buids the repos tagged commits
+// (releases/candidates/etc.)
+
 def HASHLONG
 def HASHSHORT
 def TAG
@@ -11,6 +14,7 @@ pipeline {
     agent any
     environment {
         ARCH = sh(returnStdout: true, script: 'uname -m').trim()
+        KUBECONFIG = '/opt/kube/config'
     }
     stages {
         stage ('Create Tag Hash') {
@@ -87,8 +91,7 @@ pipeline {
                 color: "good",
                 message: """\
                     SUCCESS ${env.JOB_NAME} #${env.BUILD_NUMBER},
-                    v${TAG_HASH},
-                    Took: ${currentBuild.durationString.replace(
+                    v${TAG_HASH}, Took: ${currentBuild.durationString.replace(
                         ' and counting', ''
                     )} (<${env.BUILD_URL}|Open>)
                 """.stripIndent()
@@ -99,8 +102,7 @@ pipeline {
                 color: "danger",
                 message: """\
                     FAILURE ${env.JOB_NAME} #${env.BUILD_NUMBER},
-                    v${TAG_HASH}, 
-                    Took: ${currentBuild.durationString.replace(
+                    v${TAG_HASH}, Took: ${currentBuild.durationString.replace(
                         ' and counting', ''
                     )} (<${env.BUILD_URL}|Open>)
                 """.stripIndent()
