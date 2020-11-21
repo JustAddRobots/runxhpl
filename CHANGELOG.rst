@@ -1,6 +1,16 @@
 Changelog
 =========
 
+0.1.4 (2020-11-21)
+------------------
+- Stage: Added misc fixes. (814ba7e) [JustAddRobots]
+- Stage: Reverted changes, no 'make' in jenkins-docker, see ISSUE-010. (9505d18) [JustAddRobots]
+- Stage: Added more shell troubleshooting. (352f722) [JustAddRobots]
+- Stage: Added more make troubleshooting bits. (ee853cb) [JustAddRobots]
+- Stage: Added jenkinslinter, but the pre-commit hook is broken. (740e037) [JustAddRobots]
+- Stage: Added shell $PATH echo, jenkinslint. (a638591) [JustAddRobots]
+- LOAD-010: Added echo of $PATH during build for troubleshooting. (3e280a7) [JustAddRobots]
+
 0.1.1 (2020-11-16)
 ------------------
 - Stage: Added repofile for epel, openblas. (e685db8) [JustAddRobots]
