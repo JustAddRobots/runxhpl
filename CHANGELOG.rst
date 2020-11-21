@@ -1,6 +1,15 @@
 Changelog
 =========
 
+0.1.6 (2020-11-21)
+------------------
+- Stage: Adding dummy file for more multibranch pipeline tests. (a8bf3c7) [JustAddRobots]
+- Stage: Removed dummy file for multibranch pipeline testing. (1252e5e) [JustAddRobots]
+- Stage: Added dummy file to test multibranch pipeline. (4db3306) [JustAddRobots]
+- Stage: Removed unnecessary $PATH check. (f7a121f) [JustAddRobots]
+- Stage: Removed unnecessary $PATH check. (d9b55b6) [JustAddRobots]
+- ISSUE-013: Added multibranch Jenkinsfile. (b7d35f9) [JustAddRobots]
+
 0.1.5 (2020-11-21)
 ------------------
 - Stage: Removed dummy file, will try Jenkins multibranch pipeline. (20213a8) [JustAddRobots]
