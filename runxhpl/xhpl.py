@@ -225,8 +225,8 @@ class XHPL:
         Returns:
             cmd (str): XHPL command.
         """
-        # The docker container uses IntelMPI. Otherwise the user is responsible
-        # for MPI installation and $PATH resolution for mpirun.
+        # The docker container uses OpenMPI. Otherwise the user is responsible
+        # for MPI installation and $PATH resolution of mpirun.
         cmd_mpirun = "mpirun"
         arch = hardware.get_arch()
         if arch in ["x86_64"]:
@@ -266,6 +266,7 @@ class XHPL:
                 logger.error("Keyword Argument Missing Error")
                 logger.debug(testvar.get_debug(kwargs))
                 raise
+
         num_runs = self._get_num_runs(kwargs["num_runs"])
 
         GB = 1024 * 1024 * 1024
@@ -314,7 +315,7 @@ class XHPL:
                 dict_ = command.get_shell_cmd(self._cmd, cwd = xhpl_bin_dir)
             except KeyboardInterrupt:
                 break
-            else:
+            else:  # Append run metrics to list, average, and display
                 (
                     passfail,
                     xhpl_time,
