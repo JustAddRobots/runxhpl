@@ -1,6 +1,20 @@
 Changelog
 =========
 
+0.1.5 (2020-11-21)
+------------------
+- Stage: Removed dummy file, will try Jenkins multibranch pipeline. (20213a8) [JustAddRobots]
+- ISSUE-013: Added dummy file for testing webhook trigger. (6957843) [JustAddRobots]
+- LOAD-010: Added echo of $PATH during build for troubleshooting. (434c1bf) [JustAddRobots]
+- ISSUE-013: Added dummy file for testing webhook trigger. (57a305d) [JustAddRobots]
+- Stage: Added misc fixes. (8650126) [JustAddRobots]
+- Stage: Reverted changes, no 'make' in jenkins-docker, see ISSUE-010. (366d2a4) [JustAddRobots]
+- Stage: Added more shell troubleshooting. (0a5c6af) [JustAddRobots]
+- Stage: Added more make troubleshooting bits. (09c9ad7) [JustAddRobots]
+- Stage: Added jenkinslinter, but the pre-commit hook is broken. (560ca8a) [JustAddRobots]
+- Stage: Added shell $PATH echo, jenkinslint. (8b4a169) [JustAddRobots]
+- LOAD-010: Added echo of $PATH during build for troubleshooting. (60e1d7d) [JustAddRobots]
+
 0.1.4 (2020-11-21)
 ------------------
 - Stage: Added misc fixes. (814ba7e) [JustAddRobots]
