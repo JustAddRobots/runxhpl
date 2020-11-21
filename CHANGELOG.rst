@@ -1,6 +1,10 @@
 Changelog
 =========
 
+0.1.7 (2020-11-21)
+------------------
+- ISSUE-013: Removed unnecessary multibranch & dummy file. (b0b2e18) [JustAddRobots]
+
 0.1.6 (2020-11-21)
 ------------------
 - Stage: Adding dummy file for more multibranch pipeline tests. (a8bf3c7) [JustAddRobots]
