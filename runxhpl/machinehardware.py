@@ -14,7 +14,8 @@ class XHPLHardware:
         self._cpu_flags = self._get_cpu_flags()
         self._lscpu = self._get_lscpu()
         self._cpuinfo = self._get_cpuinfo()
-        self._dmidecode = self._get_meminfo()
+        self._dmidecode = self._get_dmidecode()
+        self._meminfo = self._get_meminfo()
 
     @property
     def serial_num(self):
