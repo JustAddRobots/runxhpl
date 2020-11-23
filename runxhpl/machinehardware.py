@@ -83,7 +83,7 @@ class XHPLHardware:
         proc = hardware.get_cpuinfo()[0]
         family = proc["cpu family"]
         model = proc["model"]
-        stepping = proc["steping"]
+        stepping = proc["stepping"]
         return "{0} {1} {2}".format(family, model, stepping)
 
     def _get_cpu_core_count(self):
