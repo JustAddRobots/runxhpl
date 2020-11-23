@@ -48,6 +48,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && \
     echo $TZ > /etc/timezone && \
     yum -y install \
     bzip2 \
+    dmidecode \
     openssh-clients \
     python3 \
     python3-pip \
