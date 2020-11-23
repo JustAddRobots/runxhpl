@@ -13,7 +13,6 @@ import time
 
 from engcommon import clihelper
 from engcommon import formattext
-from engcommon import hardware
 from engcommon import log
 from engcommon.constants import _const as CONSTANTS
 from runxhpl import apiclient
@@ -31,12 +30,6 @@ def get_command(args):
     """
     parser = argparse.ArgumentParser(
         description = "XHPL Stress Test"
-    )
-    parser.add_argument(
-        '--clear-sel',
-        action = 'store_true',
-        default = False,
-        help = 'clear SEL before run',
     )
     parser.add_argument(
         '-d', '--debug',
@@ -108,13 +101,8 @@ def run(args):
     logger = my_cli.logger
     my_cli.print_versions()
 
-    clear_sel = args['clear_sel']
     mem_pct = args['mem']
     runs = args['runs']
-
-    if clear_sel:
-        logger.debug("Clearing SEL")
-        hardware.clear_sel()
 
     my_xhpl = xhpl.XHPL(mem_percent = mem_pct)
 
@@ -133,6 +121,7 @@ def run(args):
     runs_blob = log.get_formatted_logs(runs_dict)
     my_cli.print_logdir()
 
+    # Upload via API
     apiclient.post(my_cli, my_xhpl, start=time_start, end=time_end, logs=runs_blob)
 
     logger.info("Done.\n")
