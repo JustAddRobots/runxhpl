@@ -90,7 +90,7 @@ class XHPLHardware:
         return hardware.get_cpu_core_count()
 
     def _get_cpu_flags(self):
-        return hardware.get_cpuinfo[0]["flags"]
+        return hardware.get_cpuinfo()[0]["flags"]
 
     def _get_lscpu(self):
         return hardware.get_lscpu()
