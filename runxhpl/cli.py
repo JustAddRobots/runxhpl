@@ -9,13 +9,14 @@ import logging
 import os
 import pkg_resources
 import sys
-# import time
+import time
 
 from engcommon import clihelper
 from engcommon import formattext
 from engcommon import hardware
-# from engcommon import log
+from engcommon import log
 from engcommon.constants import _const as CONSTANTS
+from runxhpl import apiclient
 from runxhpl import xhpl
 
 
@@ -118,9 +119,9 @@ def run(args):
     my_xhpl = xhpl.XHPL(mem_percent = mem_pct)
 
     # Run XHPL
-    # time_start = time.strftime('%Y-%m-%d %H:%M:%S')
+    time_start = time.strftime('%Y-%m-%d %H:%M:%S')
     runs_dict = my_xhpl.run_xhpl(num_runs = runs)
-    # time_end = time.strftime('%Y-%m-%d %H:%M:%S')
+    time_end = time.strftime('%Y-%m-%d %H:%M:%S')
 
     # Show logs
     logger.info("{0}: {1}".format(
@@ -129,8 +130,11 @@ def run(args):
     ))
     logger.info("Mean Gflops: {0}".format(my_xhpl.gflops_mean))
     my_cli.write_logs(runs_dict, 'w')
-    # runs_blob = log.get_formatted_logs(runs_dict)
+    runs_blob = log.get_formatted_logs(runs_dict)
     my_cli.print_logdir()
+
+    apiclient.post(my_cli, my_xhpl, start=time_start, end=time_end, logs=runs_blob)
+
     logger.info("Done.\n")
     return None
 
