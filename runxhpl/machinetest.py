@@ -63,8 +63,11 @@ class XHPLTest:
     def _get_test_cmd(self, cmd):
         return self._check_type(cmd, str)
 
-    def _get_test_start(self, start):
+    def _get_time_start(self, start):
         return self._check_type(start, str)
+
+    def _get_time_end(self, end):
+        return self._check_type(end, str)
 
     def _get_test_params(self, params):
         return self._check_type(params, dict)
