@@ -87,7 +87,7 @@ class XHPLHardware:
         return "{0} {1} {2}".format(family, model, stepping)
 
     def _get_cpu_core_count(self):
-        return hardware.get_core_count()
+        return hardware.cpu_get_core_count()
 
     def _get_cpu_flags(self):
         return hardware.cpuinfo[0]["flags"]
