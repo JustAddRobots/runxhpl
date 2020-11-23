@@ -6,13 +6,13 @@ from runxhpl import machinehardware
 from runxhpl import machinetest
 
 
-def post(my_cli, my_xhpl, *, time_start, time_end, run_logs):
+def post(my_cli, my_xhpl, *, start, end, logs):
     my_hardware = machinehardware.XHPLHardware()
     my_test = machinetest.XHPLTest(
         name = "xhpl",
         cmd = my_xhpl.cmd,
-        start = time_start,
-        end = time_end,
+        start = start,
+        end = end,
         params = {
             "N": my_xhpl.N,
             "NB": my_xhpl.NB,
@@ -21,7 +21,7 @@ def post(my_cli, my_xhpl, *, time_start, time_end, run_logs):
         },
         metric = my_xhpl.gflops_mean,
         status = my_xhpl.status,
-        log = run_logs
+        log = logs
     )
 
     machines = {**my_hardware.asdict(), **my_test.asdict()}
