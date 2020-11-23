@@ -83,5 +83,5 @@ class XHPLTest:
 
     def _check_type(self, var, var_type):
         if not isinstance(var, var_type):
-            raise TypeError("{0} must be type {1}".format(var, var_type.__name))
+            raise TypeError("{0} must be type {1}".format(var, var_type.__name__))
         return var
