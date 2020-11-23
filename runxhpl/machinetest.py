@@ -73,7 +73,7 @@ class XHPLTest:
         return self._check_type(params, dict)
 
     def _get_test_metric(self, metric):
-        return self._check_type(metric, str)
+        return self._check_type(metric, float)
 
     def _get_test_status(self, status):
         return self._check_type(status, str)
