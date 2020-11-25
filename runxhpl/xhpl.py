@@ -192,7 +192,7 @@ class XHPL:
         """
         N = int(math.sqrt(self._mem_xhpl / 8))
         divisor = self._NB * numpy.lcm(self._P, self._Q)
-        N = (N // divisor) * divisor
+        N = int((N // divisor) * divisor)
         return N
 
     def _get_hpl_dat(self):
