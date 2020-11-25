@@ -27,7 +27,9 @@ def post(my_cli, my_xhpl, *, start, end, logs):
 
     machines = {**my_hardware.asdict(), **my_test.asdict()}
     machines["log_id"] = my_cli.log_id
-    machines_json = json.dumps(machines)
+    machines_json = {
+        "json": json.dumps(machines)
+    }
     my_cli.write_logs(machines_json, 'a')
     resp = requests.post("http://hosaka.local:3456/machines/", json=machines)
     if resp.status_code != 201:
