@@ -31,6 +31,6 @@ def post(my_cli, my_xhpl, *, start, end, logs):
         "json": json.dumps(machines)
     }
     my_cli.write_logs(machines_json, 'a')
-    resp = requests.post("http://hosaka.local:3456/machines/", json=machines)
+    resp = requests.post("http://hosaka.local:3456/v1/machines", json=machines)
     if resp.status_code != 201:
         raise requests.Exception("POST /machines/ {}".format(resp.status_code))
