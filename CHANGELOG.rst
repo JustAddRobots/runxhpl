@@ -1,6 +1,18 @@
 Changelog
 =========
 
+0.3.1 (2020-12-05)
+------------------
+- Stage: Removed property from machinetest.asdict. (266a8a6) [JustAddRobots]
+- Stage: Removed unnecessary property decorator from asdict() (a6e252a) [JustAddRobots]
+- Stage: Updated API status_code exception, machine classes. (4f24b15) [JustAddRobots]
+- Stage: Updated HTTP status_code check >=400 until API update. (f6cf767) [JustAddRobots]
+- Stage: Updated URL for versioned API. (5d2f27d) [JustAddRobots]
+- Stage: Fixed syntax error. (6996749) [JustAddRobots]
+- Stage: Added json dump to file for reuse/troubleshooting. (a01c395) [JustAddRobots]
+- Stage: Changed N to int, might have been numpy int64. (7eb222d) [JustAddRobots]
+- Stage: Added requests exception. (63df4f9) [JustAddRobots]
+
 0.3.0 (2020-11-24)
 ------------------
 - Stage: Fixed creation/addition of stdout/stderr to logs. (2ff11e9) [JustAddRobots]
