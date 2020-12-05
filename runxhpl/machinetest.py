@@ -17,7 +17,6 @@ class XHPLTest:
         test_metric (str): Metric used to help detect PASSED/FAILED.
         test_status (str): PASSED/FAILED status of test.
         test_log (str): Test logs.
-        asdict (dict): Dictionary of above tests with results.
     """
 
     def __init__(self, *, name, cmd, start, end, params, metric, status, log):
@@ -62,7 +61,6 @@ class XHPLTest:
     def test_log(self):
         return self._test_log
 
-    @property
     def asdict(self):
         return {
             "test_name": self.test_name,
