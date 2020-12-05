@@ -21,7 +21,6 @@ class XHPLHardware:
         lscpu (dict): 'lscpu'.
         cpuinfo (list): 'cpuinfo'.
         meminfo (dict): 'meminfo'.
-        asdict (dict): Dictionary of above attributes with values.
     """
     def __init__(self):
         self._serial_num = self._get_serial_num()
@@ -75,7 +74,6 @@ class XHPLHardware:
     def meminfo(self):
         return self._meminfo
 
-    @property
     def asdict(self):
         return {
             "serial_num": self.serial_num,
