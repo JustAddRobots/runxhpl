@@ -192,7 +192,7 @@ class XHPL:
         """
         N = int(math.sqrt(self._mem_xhpl / 8))
         divisor = self._NB * numpy.lcm(self._P, self._Q)
-        N = (N // divisor) * divisor
+        N = int((N // divisor) * divisor)
         return N
 
     def _get_hpl_dat(self):
@@ -304,6 +304,7 @@ class XHPL:
         status_runs = []
         gflops_runs = []
         time_runs = []
+        runs_dict = {}
         count = 1
         while True:
             self._print_status(
@@ -335,7 +336,7 @@ class XHPL:
                     "--- stdout ---\n{0}\n".format(dict_["stdout"])
                     + "--- stderr ---\n{0}\n".format(dict_["stderr"])
                 )
-                runs_dict = {str(count): run_log}
+                runs_dict[str(count)] = run_log
             count += 1
             if (count > num_runs) and (num_runs != 0):
                 break

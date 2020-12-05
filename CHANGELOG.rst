@@ -1,6 +1,36 @@
 Changelog
 =========
 
+0.3.1 (2020-12-05)
+------------------
+- Stage: Removed property from machinetest.asdict. (266a8a6) [JustAddRobots]
+- Stage: Removed unnecessary property decorator from asdict() (a6e252a) [JustAddRobots]
+- Stage: Updated API status_code exception, machine classes. (4f24b15) [JustAddRobots]
+- Stage: Updated HTTP status_code check >=400 until API update. (f6cf767) [JustAddRobots]
+- Stage: Updated URL for versioned API. (5d2f27d) [JustAddRobots]
+- Stage: Fixed syntax error. (6996749) [JustAddRobots]
+- Stage: Added json dump to file for reuse/troubleshooting. (a01c395) [JustAddRobots]
+- Stage: Changed N to int, might have been numpy int64. (7eb222d) [JustAddRobots]
+- Stage: Added requests exception. (63df4f9) [JustAddRobots]
+
+0.3.0 (2020-11-24)
+------------------
+- Stage: Fixed creation/addition of stdout/stderr to logs. (2ff11e9) [JustAddRobots]
+- Stage: Fixed mistake of forgotten meminfo function. (fa3910a) [JustAddRobots]
+- Stage: Changed metric back to str for MySQL storage. (5abf84b) [JustAddRobots]
+- Stage: Changed metric type to float. (71d8d02) [JustAddRobots]
+- Stage: Fixed typo. (b190ffb) [JustAddRobots]
+- Stage: Added missing time_end function. (74e531f) [JustAddRobots]
+- Stage: Fixed typo. (3bd565a) [JustAddRobots]
+- Stage: Fixed typo. (d433dcc) [JustAddRobots]
+- Stage: Fixed typo. (d722691) [JustAddRobots]
+- Stage: Fixed typo. (6898544) [JustAddRobots]
+- Stage: Fixed typo. (15730f3) [JustAddRobots]
+- Stage: Added dmidecode to Dockerfile. (d80276d) [JustAddRobots]
+- Stage: Fixed kwarg alignmene between cli <-> apiclient. (d4f0493) [JustAddRobots]
+- ISSUE-020: Removed unnecessary SEL clear. (3fbce05) [JustAddRobots]
+- ISSUE-020: Added apiclient and class support. (b86a98d) [JustAddRobots]
+
 0.1.7 (2020-11-21)
 ------------------
 - ISSUE-013: Removed unnecessary multibranch & dummy file. (b0b2e18) [JustAddRobots]
