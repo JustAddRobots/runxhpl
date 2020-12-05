@@ -121,8 +121,15 @@ def run(args):
     runs_blob = log.get_formatted_logs(runs_dict)
     my_cli.print_logdir()
 
-    # Upload via API
-    apiclient.post(my_cli, my_xhpl, start=time_start, end=time_end, logs=runs_blob)
+    # Upload via API client
+    logger.info("Uploading to Database")
+    apiclient.post(
+        my_cli,
+        my_xhpl,
+        start=time_start,
+        end=time_end,
+        logs=runs_blob
+    )
 
     logger.info("Done.\n")
     return None

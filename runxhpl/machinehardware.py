@@ -1,10 +1,28 @@
 #!/usr/bin/env python3
 
+"""
+This module module consolidates machine hardware information for logging
+and export.
+"""
+
 from engcommon import hardware
 
 
 class XHPLHardware:
+    """A class for organising machine hardware information.
 
+    Attributes:
+        serial_num (string): serial number.
+        uuid (string): UUID.
+        cpu_vendor (string): CPU vendor.
+        cpu_family_model_stepping (string): CPU spec (space separated).
+        cpu_core_count (int): Total cores.
+        cpu_flags (string): CPU flags enabled.
+        lscpu (dict): 'lscpu'.
+        cpuinfo (list): 'cpuinfo'.
+        meminfo (dict): 'meminfo'.
+        asdict (dict): Dictionary of above attributes with values.
+    """
     def __init__(self):
         self._serial_num = self._get_serial_num()
         self._uuid = self._get_uuid()
@@ -57,6 +75,7 @@ class XHPLHardware:
     def meminfo(self):
         return self._meminfo
 
+    @property
     def asdict(self):
         return {
             "serial_num": self.serial_num,
