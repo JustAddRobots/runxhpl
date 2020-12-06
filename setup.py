@@ -49,5 +49,5 @@ setup(
             "runxhpl = runxhpl.cli:main",
         ]
     },
-    zip_safe = False,
+    zip_safe = False
 )
