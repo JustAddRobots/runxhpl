@@ -61,6 +61,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && \
     chmod 600 /root/.ssh/* && \
     python3 -m pip install --upgrade pip && \
     python3 -m pip install --upgrade setuptools && \
+    echo "BRANCH: $ENGCOMMON_BRANCH" && \
     ENGCOMMON_BRANCH=$ENGCOMMON_BRANCH python3 -m pip install --force-reinstall git+ssh://git@runxhpl.github.com/JustAddRobots/runxhpl.git@$GIT_COMMIT && \
     rm -rf ~/.cache/pip
 
