@@ -22,6 +22,7 @@ repos:
         entry: pytest -v
         language: system
         types: [python]
+        pass_filenames: false
 # -   repo: https://github.com/PeterMosmans/jenkinslint
 #     rev: master
 #     hooks:
