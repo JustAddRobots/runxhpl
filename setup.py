@@ -11,6 +11,12 @@ with open(os.path.dirname(__file__) + "/VERSION") as f:
     pkgversion = f.read().strip()
 
 
+if 'ENGCOMMON_BRANCH' in os.environ:
+    engcommon_branch = os.getenv("ENGCOMMON_BRANCH")
+else:
+    engcommon_branch = "main"
+
+
 setup(
     name = "runxhpl",
     version = pkgversion,
@@ -30,7 +36,12 @@ setup(
     include_package_data = True,
     install_requires = [
         "docker",
-        "engcommon @ git+ssh://git@engcommon.github.com/JustAddRobots/engcommon.git",
+        (
+            "engcommon @ "
+            "git+ssh://git@engcommon.github.com/JustAddRobots/engcommon.git@{0}".format(
+                engcommon_branch
+            )
+        ),
         "numpy",
     ],
     entry_points = {

@@ -1,6 +1,12 @@
 Changelog
 =========
 
+0.4.0 (2020-12-06)
+------------------
+- Stage: Changed to ARG for ENGCOMMON_BRANCH. (d78add8) [JustAddRobots]
+- Stage: Troubleshooting ENGCOMMON_BRANCH resoultion. (9c47955) [JustAddRobots]
+- ISSUE-024: Added ENGCOMMON_BRANCH selector. (686e0fb) [JustAddRobots]
+
 0.3.1 (2020-12-05)
 ------------------
 - Stage: Removed property from machinetest.asdict. (266a8a6) [JustAddRobots]
