@@ -1,6 +1,11 @@
 Changelog
 =========
 
+0.5.0 (2020-12-06)
+------------------
+- ISSUE-023: Fixed pre-commit options for non-test files. (6147469) [JustAddRobots]
+- ISSUE-023: Remove setup.py for pytest error fix. (da06db8) [JustAddRobots]
+
 0.4.0 (2020-12-06)
 ------------------
 - Stage: Changed to ARG for ENGCOMMON_BRANCH. (d78add8) [JustAddRobots]
