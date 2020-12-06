@@ -8,12 +8,20 @@ repos:
     -   id: end-of-file-fixer
         exclude: ".bumpversion.cfg"
     -   id: check-yaml
+    -   id: check-json
     -   id: check-added-large-files
         args: ["--maxkb=2048"]
 -   repo: https://github.com/PyCQA/flake8
     rev: 3.8.3
     hooks:
     -   id: flake8
+-   repo: local
+    hooks:
+    -   id: pytest
+        name: pytest unit tests
+        entry: pytest -v
+        language: system
+        types: [python]
 # -   repo: https://github.com/PeterMosmans/jenkinslint
 #     rev: master
 #     hooks:

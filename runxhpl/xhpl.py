@@ -98,6 +98,11 @@ class XHPL:
         return self._num_cores
 
     @property
+    def mem_free(self):
+        "Get free mem."
+        return self._mem_free
+
+    @property
     def mem_xhpl(self):
         "Get XHPL mem."
         return self._mem_xhpl
