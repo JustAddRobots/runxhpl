@@ -34,6 +34,7 @@ ENV LOGID="${LOGID}"
 ENV PREFIX="${PREFIX}"
 ENV SERVER="${SERVER}"
 ARG GIT_COMMIT="master"
+ENV ENGCOMMON_BRANCH="${ENGCOMMON_BRANCH}"
 ENV PATH="${PATH}:/usr/lib64/openmpi3/bin"
 
 # Copy binaries used for RUN
@@ -60,7 +61,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && \
     chmod 600 /root/.ssh/* && \
     python3 -m pip install --upgrade pip && \
     python3 -m pip install --upgrade setuptools && \
-    python3 -m pip install --force-reinstall git+ssh://git@runxhpl.github.com/JustAddRobots/runxhpl.git@$GIT_COMMIT && \
+    ENGCOMMON_BRANCH=$ENGCOMMON_BRANCH python3 -m pip install --force-reinstall git+ssh://git@runxhpl.github.com/JustAddRobots/runxhpl.git@$GIT_COMMIT && \
     rm -rf ~/.cache/pip
 
 # Copy binaries

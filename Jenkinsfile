@@ -62,7 +62,8 @@ pipeline {
                     """.stripIndent()
                 )
                 sh("""\
-                    make -C docker/${ARCH}/el-7 SERVER=${SERVER} build push
+                    make -C docker/${ARCH}/el-7 SERVER=${SERVER} \
+                    ENGCOMMON_BRANCH=main build push
                 """)
             }
         }
