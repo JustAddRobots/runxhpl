@@ -31,7 +31,10 @@ pipeline {
     agent any
     environment {
         ARCH = sh(returnStdout: true, script: 'uname -m').trim()
-        loadProperties()
+        def resp = httpRequest "http://hosaka.local/ini/builder.json"
+        def props = readJSON text: resp.getContent()
+        DOCKERHOST = props["dockerhost"]
+        KUBECONFIG = props["kubeconfig"]
     }
     stages {
         stage ('Create Tag Hash') {
