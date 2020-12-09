@@ -31,10 +31,6 @@ pipeline {
     agent any
     environment {
         ARCH = sh(returnStdout: true, script: 'uname -m').trim()
-        def resp = httpRequest "http://hosaka.local/ini/builder.json"
-        def props = readJSON text: resp.getContent()
-        DOCKERHOST = props["dockerhost"]
-        KUBECONFIG = props["kubeconfig"]
     }
     stages {
         stage ('Read INI') {
