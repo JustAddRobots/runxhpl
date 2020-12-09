@@ -76,7 +76,7 @@ pipeline {
                     SERVER = "hosaka.local:5000"
                 }
                 echo "BRANCH: ${BRANCH}"
-                echo "DOCKERHOST: ${DOCKERHOST}"
+                echo "DOCKERHOST: ${env.DOCKERHOST}"
                 slackSend(
                     message: """\
                         STARTED ${env.JOB_NAME} #${env.BUILD_NUMBER},
@@ -84,7 +84,7 @@ pipeline {
                     """.stripIndent()
                 )
                 sh("""\
-                    make -C docker/${ARCH}/el-7 DOCKERHOST=${DOCKERHOST} \
+                    make -C docker/${ARCH}/el-7 DOCKERHOST=${env.DOCKERHOST} \
                     ENGCOMMON_BRANCH=main build push
                 """)
             }
@@ -93,7 +93,7 @@ pipeline {
             steps {
                 script {
                     IMG = ("""\
-                        ${DOCKERHOST}/runxhpl:\
+                        ${env.DOCKERHOST}/runxhpl:\
                         ${TAG_HASH}
                     """.stripIndent().replaceAll("\\s","")
                     )
