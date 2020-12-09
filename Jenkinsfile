@@ -18,8 +18,22 @@ def loadProperties() {
     //props = readProperties file: "${workspace}/engcommon/builder.ini"
     def resp = httpRequest "http://hosaka.local/ini/builder.ini"
     def content = resp.getContent()
-    echo "Content: ${content}"
-    def props = readProperties text: content
+    echo "${content}"
+    var m = {}
+    var lines = content.split("\n")
+    for (var i = 0; i < lines.length; i++) {
+        if lines[i].startswith("[") {
+            pass
+        }
+        else {
+            kv = lines[i].split("=")
+            k = kv[0]
+            v = kv[1]
+            m[k] = v
+        }
+    }
+    echo "${m}
+    def props = readProperties defaults: m
     DOCKERHOST = props["dockerhost"]
     KUBECONFIG = props["kubeconfig"]
     //DOCKERHOST = "hosaka.local:5000"
