@@ -37,6 +37,11 @@ pipeline {
         KUBECONFIG = props["kubeconfig"]
     }
     stages {
+        stage ('Read INI') {
+            steps {
+                loadProperties()
+            }
+        }
         stage ('Create Tag Hash') {
             steps {
                 script {
