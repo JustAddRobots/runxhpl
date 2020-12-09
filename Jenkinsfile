@@ -10,11 +10,22 @@ def TAG_HASH
 def BRANCH
 def SERVER
 
+def DOCKERHOST
+def KUBECONFIG
+
+// Requires "Pipeline Utility Steps" plugin
+def loadProperties() {
+    def workspace = pwd()
+    //props = readProperties file: "${workspace}/engcommon/builder.ini"
+    //DOCKERHOST = props["dockerhost"]
+    DOCKERHOST = "hosaka.local:5000"
+    KUBECONFIG = '/opt/kube/config'
+}
+
 pipeline {
     agent any
     environment {
         ARCH = sh(returnStdout: true, script: 'uname -m').trim()
-        KUBECONFIG = '/opt/kube/config'
     }
     stages {
         stage ('Create Tag Hash') {
@@ -40,6 +51,7 @@ pipeline {
                 echo "HASHSHORT: ${HASHSHORT}"
                 echo "TAG: ${TAG}"
                 echo "TAG_HASH: ${TAG_HASH}"
+                
             }
         }
         stage ('Build Docker Container') {
@@ -54,7 +66,7 @@ pipeline {
                     SERVER = "hosaka.local:5000"
                 }
                 echo "BRANCH: ${BRANCH}"
-                echo "SERVER: ${SERVER}"
+                echo "DOCKERHOST: ${DOCKERHOST}"
                 slackSend(
                     message: """\
                         STARTED ${env.JOB_NAME} #${env.BUILD_NUMBER},
@@ -62,7 +74,7 @@ pipeline {
                     """.stripIndent()
                 )
                 sh("""\
-                    make -C docker/${ARCH}/el-7 SERVER=${SERVER} \
+                    make -C docker/${ARCH}/el-7 DOCKERHOST=${DOCKERHOST} \
                     ENGCOMMON_BRANCH=main build push
                 """)
             }
@@ -71,7 +83,7 @@ pipeline {
             steps {
                 script {
                     IMG = ("""\
-                        ${SERVER}/runxhpl:\
+                        ${DOCKERHOST}/runxhpl:\
                         ${TAG_HASH}
                     """.stripIndent().replaceAll("\\s","")
                     )
