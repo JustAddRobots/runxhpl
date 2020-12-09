@@ -51,7 +51,7 @@ pipeline {
                 echo "HASHSHORT: ${HASHSHORT}"
                 echo "TAG: ${TAG}"
                 echo "TAG_HASH: ${TAG_HASH}"
-                
+                loadProperties()
             }
         }
         stage ('Build Docker Container') {
