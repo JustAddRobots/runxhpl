@@ -19,7 +19,8 @@ def loadProperties() {
     def resp = httpRequest "http://hosaka.local/ini/builder.json"
     def content = resp.getContent()
     echo "${content}"
-    def props = readJSON text: "${content}"
+    def m = readJSON text: "${content}"
+    def props = readProperties defaults: m
     DOCKERHOST = props["dockerhost"]
     KUBECONFIG = props["kubeconfig"]
     echo "DOCKERHOST: ${DOCKERHOST}"
