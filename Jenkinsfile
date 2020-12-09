@@ -31,6 +31,7 @@ pipeline {
     agent any
     environment {
         ARCH = sh(returnStdout: true, script: 'uname -m').trim()
+        loadProperties()
     }
     stages {
         stage ('Create Tag Hash') {
@@ -56,7 +57,6 @@ pipeline {
                 echo "HASHSHORT: ${HASHSHORT}"
                 echo "TAG: ${TAG}"
                 echo "TAG_HASH: ${TAG_HASH}"
-                loadProperties()
             }
         }
         stage ('Build Docker Container') {
