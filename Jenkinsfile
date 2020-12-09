@@ -21,6 +21,8 @@ def loadProperties() {
     def props = readJSON text: "${content}"
     DOCKERHOST = props["dockerhost"]
     KUBECONFIG = props["kubeconfig"]
+    echo "${content}"
+    echo "DOCKERHOST: ${DOCKERHOST}"
     //DOCKERHOST = "hosaka.local:5000"
     //KUBECONFIG = '/opt/kube/config'
 }
