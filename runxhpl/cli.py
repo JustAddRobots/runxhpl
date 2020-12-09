@@ -12,6 +12,7 @@ import sys
 import time
 
 from engcommon import clihelper
+from engcommon import ini
 from engcommon import formattext
 from engcommon import log
 from engcommon.constants import _const as CONSTANTS
@@ -32,53 +33,54 @@ def get_command(args):
         description = "XHPL Stress Test"
     )
     parser.add_argument(
-        '-d', '--debug',
-        action = 'store_true',
-        help = 'print debug information',
+        "-d", "--debug",
+        action = "store_true",
+        help = "print debug information",
     )
     parser.add_argument(
-        '-l', '--logid',
-        action = 'store',
+        "-l", "--logid",
+        action = "store",
         type = str,
         help = "force log_id for DB upload",
         required = False,
     )
     parser.add_argument(
-        '-m', '--mem',
-        action = 'store',
+        "-m", "--mem",
+        action = "store",
         type = int,
         default = CONSTANTS().XHPL_MEM_PCT,
-        help = 'set memory percentage',
+        help = "set memory percentage",
     )
     parser.add_argument(
-        '-p', '--prefix',
-        action = 'store',
+        "-p", "--prefix",
+        action = "store",
         type = str,
         default = "/tmp/logs",
-        help = 'set prefix directory',
+        help = "set prefix directory",
     )
     parser.add_argument(
-        '-r', '--runs',
-        action = 'store',
+        "-r", "--runs",
+        action = "store",
         type = int,
         default = 0,  # infinite
-        help = 'set number of runs',
+        help = "set number of runs",
     )
     parser.add_argument(
-        '-y', '--dry-run',
-        action = 'store_true',
-        help = 'execute dry-run',
+        "-u", "--upload",
+        action = "store",
+        type = str,
+        default = ini.INIConfig().xhplconsole_url,
+        nargs = "?",
+        help = "upload to server",
     )
     parser.add_argument(
-        '-t', '--timeout',
-        action = 'store',
-        type = int,
-        default = CONSTANTS().XHPL_TIMEOUT,
-        help = 'set timeout (hours)',
+        "-y", "--dry-run",
+        action = "store_true",
+        help = "execute dry-run",
     )
     parser.add_argument(
-        '-v', '--version',
-        action = 'version',
+        "-v", "--version",
+        action = "version",
         version = pkg_resources.get_distribution(parser.prog).version
     )
     args = vars(parser.parse_args(args))
@@ -101,35 +103,38 @@ def run(args):
     logger = my_cli.logger
     my_cli.print_versions()
 
-    mem_pct = args['mem']
-    runs = args['runs']
+    mem_pct = args["mem"]
+    runs = args["runs"]
+    upload_url = args["upload"]
 
     my_xhpl = xhpl.XHPL(mem_percent = mem_pct)
 
     # Run XHPL
-    time_start = time.strftime('%Y-%m-%d %H:%M:%S')
+    time_start = time.strftime("%Y-%m-%d %H:%M:%S")
     runs_dict = my_xhpl.run_xhpl(num_runs = runs)
-    time_end = time.strftime('%Y-%m-%d %H:%M:%S')
+    time_end = time.strftime("%Y-%m-%d %H:%M:%S")
 
     # Show logs
     logger.info("{0}: {1}".format(
-        formattext.add_colour("Status", "magenta"),
+        formattext.add_colour("Status", "cyan"),
         my_xhpl.status,
     ))
     logger.info("Mean Gflops: {0}".format(my_xhpl.gflops_mean))
-    my_cli.write_logs(runs_dict, 'w')
+    my_cli.write_logs(runs_dict, "w")
     runs_blob = log.get_formatted_logs(runs_dict)
     my_cli.print_logdir()
 
-    # Upload via API client
-    logger.info("Uploading to Database")
-    apiclient.post(
-        my_cli,
-        my_xhpl,
-        start=time_start,
-        end=time_end,
-        logs=runs_blob
-    )
+    if upload_url:
+        # Upload via API client
+        logger.info("Uploading to Database")
+        apiclient.post(
+            my_cli,
+            my_xhpl,
+            upload_url,
+            start=time_start,
+            end=time_end,
+            logs=runs_blob
+        )
 
     logger.info("Done.\n")
     return None
@@ -141,7 +146,7 @@ def main():
     run(d)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     try:
         main()
     except Exception:

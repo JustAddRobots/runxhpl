@@ -1,6 +1,7 @@
 # Stage 1: Create build container
 
-FROM hosaka.local:5000/centos:7.8-x86_64 as builder
+ARG DOCKERHOST="${DOCKERHOST}"
+FROM ${DOCKERHOST}/centos:7.8-x86_64 as builder
 WORKDIR /
 COPY ./repofile/* /etc/yum.repos.d/
 ENV TZ=America/Los_Angeles
@@ -24,7 +25,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && \
 
 # Stage 2: Create deployment container
 
-FROM hosaka.local:5000/centos:7.8-x86_64
+FROM ${DOCKERHOST}/centos:7.8-x86_64
 WORKDIR /
 ENV TZ=America/Los_Angeles
 ENV DEBUG=""

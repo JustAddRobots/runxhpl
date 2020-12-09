@@ -14,12 +14,13 @@ from runxhpl import machinehardware
 from runxhpl import machinetest
 
 
-def post(my_cli, my_xhpl, *, start, end, logs):
+def post(my_cli, my_xhpl, upload_url, *, start, end, logs):
     """Post XHPL test run.
 
     Args:
         my_cli (clihelper.CLI): CLI helper instance.
         my_xhpl (xhpl.XHPL): XHPL test instance.
+        upload_url (str): Upload logs to this URL.
         start (timestamp): Start time.
         end (timestamp): End time.
         logs (string): Test logs.
@@ -46,16 +47,17 @@ def post(my_cli, my_xhpl, *, start, end, logs):
         status = my_xhpl.status,
         log = logs
     )
+
     # Prepare single dictionary for JSON conversion
     machines = {**my_hardware.asdict(), **my_test.asdict()}
     machines["log_id"] = my_cli.log_id
     machines_json = {
         "json": json.dumps(machines)
     }
+
     # Write to local logfile and upload to SQL DB
     my_cli.write_logs(machines_json, 'a')
-    url = "http://hosaka.local:3456/v1/machines"
-    resp = requests.post(url, json=machines)
+    resp = requests.post(upload_url, json=machines)
     status_code = resp.status_code
     if status_code >= 400:
         raise requests.Exception("POST /machines/ {}".format(resp.status_code))
