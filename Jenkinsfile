@@ -16,9 +16,10 @@ def KUBECONFIG
 // Requires "Pipeline Utility Steps" plugin
 def loadProperties() {
     //props = readProperties file: "${workspace}/engcommon/builder.ini"
-    props = readProperties 
-    assert props.fullUrl = "http://hosaka.local/ini/builder.ini"
+    def resp = httpRequest "http://hosaka.local/ini/builder.ini"
+    def props = readProperties defaults resp.getContent()
     DOCKERHOST = props["dockerhost"]
+    KUBECONFIG = props["kubeconfig"]
     //DOCKERHOST = "hosaka.local:5000"
     //KUBECONFIG = '/opt/kube/config'
 }
