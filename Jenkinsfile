@@ -17,7 +17,9 @@ def KUBECONFIG
 def loadProperties() {
     //props = readProperties file: "${workspace}/engcommon/builder.ini"
     def resp = httpRequest "http://hosaka.local/ini/builder.ini"
-    def props = readProperties defaults resp.getContent()
+    def content = resp.getContent()
+    echo "Content: ${content}"
+    def props = readProperties defaults: content
     DOCKERHOST = props["dockerhost"]
     KUBECONFIG = props["kubeconfig"]
     //DOCKERHOST = "hosaka.local:5000"
