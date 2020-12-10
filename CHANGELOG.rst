@@ -1,6 +1,13 @@
 Changelog
 =========
 
+0.7.0 (2020-12-10)
+------------------
+- ISSUE-034: Fixed link spacing. (64ef0a6) [JustAddRobots]
+- ISSUE-034: Fixed misc language, bits. (276c952) [JustAddRobots]
+- ISSUE-034: Added docs. (8b3c502) [JustAddRobots]
+- ISSUE-031: Cleaned up CLI options. (16f5a58) [JustAddRobots]
+
 0.6.0 (2020-12-10)
 ------------------
 - Stage: Updated for JSON INI URL. (56e3ffc) [JustAddRobots]
