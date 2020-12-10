@@ -41,7 +41,7 @@ def get_command(args):
         "-l", "--logid",
         action = "store",
         type = str,
-        help = "force log_id for DB upload",
+        help = "force runtime log indentifier",
         required = False,
     )
     parser.add_argument(
@@ -56,7 +56,7 @@ def get_command(args):
         action = "store",
         type = str,
         default = "/tmp/logs",
-        help = "set prefix directory",
+        help = "set log directory prefix",
     )
     parser.add_argument(
         "-r", "--runs",
@@ -69,14 +69,9 @@ def get_command(args):
         "-u", "--upload",
         action = "store",
         type = str,
-        default = ini.INIConfig("http://hosaka.local/ini/builder.json").xhplconsole_url,
+        const = ini.INIConfig("http://hosaka.local/ini/builder.json").xhplconsole_url,
         nargs = "?",
-        help = "upload to server",
-    )
-    parser.add_argument(
-        "-y", "--dry-run",
-        action = "store_true",
-        help = "execute dry-run",
+        help = "upload to server with URL",
     )
     parser.add_argument(
         "-v", "--version",
