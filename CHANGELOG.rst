@@ -1,6 +1,31 @@
 Changelog
 =========
 
+0.6.0 (2020-12-10)
+------------------
+- Stage: Updated for JSON INI URL. (56e3ffc) [JustAddRobots]
+- Stage: Troubleshooting env var access. (e1c09cb) [JustAddRobots]
+- Stage: Added imperative env reference. (5fa3183) [JustAddRobots]
+- Stage: Added props echo. (f5fcae1) [JustAddRobots]
+- Stage: Added readProperties after readJSON. (68733ae) [JustAddRobots]
+- Stage: Removed readJSON from env block. (905ea09) [JustAddRobots]
+- Stage: More troubleshooting readJSON. (1d5ed07) [JustAddRobots]
+- Stage: Added separate INI stage. (818d0ee) [JustAddRobots]
+- Stage: Added readJSON directly to env block. (deaf58f) [JustAddRobots]
+- Stage: Moved loadPropertiest to env block. (89002fd) [JustAddRobots]
+- Stage: Troubleshooting readJSON for loadProperties() (5acb189) [JustAddRobots]
+- Stage: Fixed quotes for var interpolation. (e7ceba8) [JustAddRobots]
+- Stage: Fixed JSON string. (c762ebf) [JustAddRobots]
+- Stage: Punted on INI format, switched to JSON for loadProperties. (2ffd077) [JustAddRobots]
+- Stage: Troubleshooting loadProperties string -> map. (45b51dc) [JustAddRobots]
+- Stage: Troubleshooting readProperties instantiaion with INI section name. (df60990) [JustAddRobots]
+- Stage: Troubleshooting INI url download for Jenkins properties. (b91211b) [JustAddRobots]
+- Stage: Added httpRequest module for INI url. (abca182) [JustAddRobots]
+- Stage: Updated loadProperties() (d42e617) [JustAddRobots]
+- Stage: Added loadProperties() (f1ba153) [JustAddRobots]
+- Stage: Added loadProperties() with workaround until INI URL. (ef7b551) [JustAddRobots]
+- ISSUE-030: Added INI config integration, option DB upload. (b916198) [JustAddRobots]
+
 0.5.0 (2020-12-06)
 ------------------
 - ISSUE-023: Fixed pre-commit options for non-test files. (6147469) [JustAddRobots]
