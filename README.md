@@ -13,7 +13,8 @@ shared-memory benchmark.
 One day maybe I'll include build tools for various compilers, BLAS, and MPI 
 implementations in this repo.
 
-There is **no support** for this project.
+This is primarily built as part of a proof-of-concept for a specific CI/CD environment.
+YMMV. There is **no support** for this project.
 
 
 ## Background
@@ -28,6 +29,7 @@ are then dealt onto the P x Q process grid. Results are checked by regenerating 
 input matrix and checking the error.
 
 For more information, see:
+
 https://www.netlib.org/benchmark/hpl/
 https://www.netlib.org/utk/people/JackDongarra/PAPERS/hpl.pdf
 https://ulhpc-tutorials.readthedocs.io/en/latest/parallel/mpi/HPL/#hpl-main-parameters
@@ -70,7 +72,7 @@ optional arguments:
 ### Run HPL with targeted memory usage 
 
 ```
-[root@hosaka /]# runxhpl --debug --mem 50 --runs 2 -u
+[root@hosaka /]# runxhpl --debug --mem 50 --runs 2 --upload
 2020-12-09 20:50:23 - INFO [clihelper]: runxhpl v: 0.6.0
 2020-12-09 20:50:23 - DEBUG [clihelper]: engcommon v: 0.5.1
 2020-12-09 20:50:23 - DEBUG [clihelper]: {'debug': True, 'dry_run': False, 'log_id': None, 'mem': 50, 'prefix': '/tmp/logs', 'runs': 2, 'upload': 'http://hosaka.local:3456/v1/machines'}
