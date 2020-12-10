@@ -10,13 +10,35 @@ def TAG_HASH
 def BRANCH
 def SERVER
 
+def DOCKERHOST
+def KUBECONFIG
+
+// Requires "Pipeline Utility Steps" plugin
+def loadProperties() {
+    //props = readProperties file: "${workspace}/engcommon/builder.ini"
+    def resp = httpRequest "http://hosaka.local/ini/builder.json"
+    def content = resp.getContent()
+    echo "${content}"
+    def props = readJSON text: "${content}"
+    echo "${props}"
+    env.DOCKERHOST = props["dockerhost"]
+    env.KUBECONFIG = props["kubeconfig"]
+    echo "DOCKERHOST: ${DOCKERHOST}"
+    //DOCKERHOST = "hosaka.local:5000"
+    //KUBECONFIG = '/opt/kube/config'
+}
+
 pipeline {
     agent any
     environment {
         ARCH = sh(returnStdout: true, script: 'uname -m').trim()
-        KUBECONFIG = '/opt/kube/config'
     }
     stages {
+        stage ('Read INI') {
+            steps {
+                loadProperties()
+            }
+        }
         stage ('Create Tag Hash') {
             steps {
                 script {
@@ -54,7 +76,7 @@ pipeline {
                     SERVER = "hosaka.local:5000"
                 }
                 echo "BRANCH: ${BRANCH}"
-                echo "SERVER: ${SERVER}"
+                echo "DOCKERHOST: ${env.DOCKERHOST}"
                 slackSend(
                     message: """\
                         STARTED ${env.JOB_NAME} #${env.BUILD_NUMBER},
@@ -62,7 +84,7 @@ pipeline {
                     """.stripIndent()
                 )
                 sh("""\
-                    make -C docker/${ARCH}/el-7 SERVER=${SERVER} \
+                    make -C docker/${ARCH}/el-7 DOCKERHOST=${env.DOCKERHOST} \
                     ENGCOMMON_BRANCH=main build push
                 """)
             }
@@ -71,7 +93,7 @@ pipeline {
             steps {
                 script {
                     IMG = ("""\
-                        ${SERVER}/runxhpl:\
+                        ${env.DOCKERHOST}/runxhpl:\
                         ${TAG_HASH}
                     """.stripIndent().replaceAll("\\s","")
                     )
