@@ -31,7 +31,9 @@ input matrix and checking the error.
 For more information, see:
 
 https://www.netlib.org/benchmark/hpl/
+
 https://www.netlib.org/utk/people/JackDongarra/PAPERS/hpl.pdf
+
 https://ulhpc-tutorials.readthedocs.io/en/latest/parallel/mpi/HPL/#hpl-main-parameters
 
 
