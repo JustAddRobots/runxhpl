@@ -1,6 +1,11 @@
 Changelog
 =========
 
+0.7.3 (2020-12-11)
+------------------
+- ISSUE-040: Updated to use INI_URL. (1379dfc) [JustAddRobots]
+- ISSUE-040: Updated to use INI_URL. (399466b) [JustAddRobots]
+
 0.7.0 (2020-12-10)
 ------------------
 - ISSUE-034: Fixed link spacing. (64ef0a6) [JustAddRobots]
