@@ -69,7 +69,7 @@ def get_command(args):
         "-u", "--upload",
         action = "store",
         type = str,
-        const = ini.INIConfig("http://hosaka.local/ini/builder.json").xhplconsole_url,
+        const = ini.INIConfig(CONSTANTS().INI_URL).xhplconsole_url,
         nargs = "?",
         help = "upload to server with URL",
     )
