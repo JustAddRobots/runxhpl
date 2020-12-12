@@ -1,6 +1,10 @@
 Changelog
 =========
 
+0.8.3 (2020-12-12)
+------------------
+- Stage: Fixed tag delete syntax, ordering. (2d3e15b) [JustAddRobots]
+
 0.8.2 (2020-12-12)
 ------------------
 - Stage: Added echo of MMP for delete tag troubleshooting. (280d66f) [JustAddRobots]
