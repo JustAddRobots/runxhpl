@@ -1,6 +1,26 @@
 Changelog
 =========
 
+0.8.1 (2020-12-12)
+------------------
+- Stage: More Troubleshooting delete RC tags stage. (622a8a4) [JustAddRobots]
+
+0.8.0 (2020-12-12)
+------------------
+- Stage: Troubleshooting "when" branch conditional. (db7a784) [JustAddRobots]
+- Stage: Fixed syntax error. (ace7ba7) [JustAddRobots]
+- Stage: Removed errant curly brace. (8790ba5) [JustAddRobots]
+- Stage: Fixed escape of dollar sign in Jenkins pipeline "sh" (bbfa0cc) [JustAddRobots]
+- ISSUE-043: Added make default & delete RC pipeline stages. (f738b66) [JustAddRobots]
+- ISSUE-040: Updated to use INI_URL. (43e3ba4) [JustAddRobots]
+- ISSUE-043: Added make default & delete RC pipeline stages. (7e36a11) [JustAddRobots]
+- ISSUE-040: Updated to use INI_URL. (28caf9f) [JustAddRobots]
+
+0.7.3 (2020-12-11)
+------------------
+- ISSUE-040: Updated to use INI_URL. (1379dfc) [JustAddRobots]
+- ISSUE-040: Updated to use INI_URL. (399466b) [JustAddRobots]
+
 0.7.0 (2020-12-10)
 ------------------
 - ISSUE-034: Fixed link spacing. (64ef0a6) [JustAddRobots]
