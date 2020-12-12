@@ -128,7 +128,7 @@ pipeline {
                     sh(
                         returnStdout: false,
                         script: """\
-                            git push --delete origin \$(git tag -l "${env.$MMP}-rc*")
+                            git push --delete origin \$(git tag -l "${env.MMP}-rc*")
                         """
                     )
                     sh(
@@ -137,8 +137,8 @@ pipeline {
                             git tag -d \$(git tag -l "${env.MMP}-rc*")
                         """
                     )
-                //sh("""git push --delete origin \$(git tag -l "${$MMP}-rc*")""")
-                //sh("""git tag -d \$(git tag -l "${MMP}-rc*")""")
+                //sh("""git push --delete origin \$(git tag -l "${env.MMP}-rc*")""")
+                //sh("""git tag -d \$(git tag -l "${env.MMP}-rc*")""")
                 }
             }
         }
