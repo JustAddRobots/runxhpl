@@ -1,6 +1,11 @@
 Changelog
 =========
 
+0.8.7 (2020-12-12)
+------------------
+- Stage: More troubleshooting MMP resolution. (a0568ac) [JustAddRobots]
+- Stage: Troubleshooting env.MMP resolution for auto tag delete. (151ebaf) [JustAddRobots]
+
 0.8.6 (2020-12-12)
 ------------------
 - Stage: Added vars to env. (5ec193a) [JustAddRobots]
