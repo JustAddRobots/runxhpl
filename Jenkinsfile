@@ -15,7 +15,6 @@ def KUBECONFIG
 
 // Requires "Pipeline Utility Steps" plugin
 def loadProperties() {
-    //props = readProperties file: "${workspace}/engcommon/builder.ini"
     def resp = httpRequest "http://hosaka.local/ini/builder.json"
     def content = resp.getContent()
     echo "${content}"
@@ -24,8 +23,6 @@ def loadProperties() {
     env.DOCKERHOST = props["dockerhost"]
     env.KUBECONFIG = props["kubeconfig"]
     echo "DOCKERHOST: ${DOCKERHOST}"
-    //DOCKERHOST = "hosaka.local:5000"
-    //KUBECONFIG = '/opt/kube/config'
 }
 
 pipeline {
@@ -105,6 +102,31 @@ pipeline {
                         -n all -i ${IMG}
                     """.stripIndent()
                 )
+            }
+        }
+        stage('Push Default Tag') {
+            when {
+                env.BRANCH} == 'main'
+            }
+            steps {
+                sh("""\
+                    make -C docker/${ARCH}/el-7 DOCKERHOST=${env.DOCKERHOST} \
+                    default
+                """)
+            }
+        }
+        stage('Delete RC Tags') {
+            when {
+                env.BRANCH} == 'main'
+            }
+            steps {
+                def (MMP, _) = "${TAG}".tokenize("-") // Major Minor Patch
+                sh("""\
+                    git tag -d $(git tag -l "${MMP}-rc*")
+                """)
+                sh("""\
+                    git push -d origin $(git tag -l "$MMP-rc*")
+                """)
             }
         }
     }

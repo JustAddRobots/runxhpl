@@ -16,6 +16,7 @@ HASHSHORT   		:= $$(git log -1 --pretty=%h --no-merges)
 TAG         		:= $$(git describe --tags --abbrev=0)
 IMGLONG     		:= ${NAME}:${TAG}-${HASHSHORT}-${ARCH}
 IMGSHORT    		:= ${NAME}:${TAG}-${ARCH}
+DEFAULT	    		:= ${NAME}:default-${ARCH}
 ENGCOMMON_BRANCH	:= $(ENGCOMMON_BRANCH)
 
 .PHONY: all
@@ -28,3 +29,7 @@ build:
 push:
 	@docker push ${IMGLONG}
 	@docker push ${IMGSHORT}
+
+default:
+	@docker tag ${IMGLONG} ${DEFAULT}
+	@docker push ${DEFAULT}
