@@ -106,7 +106,7 @@ pipeline {
         }
         stage('Push Default Tag') {
             when {
-                env.BRANCH} == 'main'
+                env.BRANCH == 'main'
             }
             steps {
                 sh("""\
