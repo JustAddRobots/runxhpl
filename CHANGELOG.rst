@@ -1,6 +1,10 @@
 Changelog
 =========
 
+0.8.6 (2020-12-12)
+------------------
+- Stage: Added vars to env. (5ec193a) [JustAddRobots]
+
 0.8.5 (2020-12-12)
 ------------------
 - Stage: Troubleshooting MMP resolution. (8823393) [JustAddRobots]
