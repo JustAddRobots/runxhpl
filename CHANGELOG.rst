@@ -1,6 +1,10 @@
 Changelog
 =========
 
+0.8.1 (2020-12-12)
+------------------
+- Stage: More Troubleshooting delete RC tags stage. (622a8a4) [JustAddRobots]
+
 0.8.0 (2020-12-12)
 ------------------
 - Stage: Troubleshooting "when" branch conditional. (db7a784) [JustAddRobots]
