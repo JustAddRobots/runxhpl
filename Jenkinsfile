@@ -123,7 +123,8 @@ pipeline {
             steps {
                 script {
                     (MMP, _) = "${env.TAG}".tokenize("-") // Major Minor Patch
-                    echo "MMP: ${MMP}"
+                    echo "TAG: ${env.TAG}"
+                    echo "MMP: ${env.MMP}"
                     sh(
                         returnStdout: false,
                         script: """\

@@ -1,6 +1,10 @@
 Changelog
 =========
 
+0.8.5 (2020-12-12)
+------------------
+- Stage: Troubleshooting MMP resolution. (8823393) [JustAddRobots]
+
 0.8.4 (2020-12-12)
 ------------------
 - Stage: More pipeline fuckery. (20ce788) [JustAddRobots]
