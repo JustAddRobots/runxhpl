@@ -117,7 +117,7 @@ pipeline {
         }
         stage('Delete RC Tags') {
             when {
-                env.BRANCH} == 'main'
+                env.BRANCH == 'main'
             }
             steps {
                 def (MMP, _) = "${env.TAG}".tokenize("-") // Major Minor Patch
