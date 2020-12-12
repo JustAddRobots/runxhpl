@@ -120,12 +120,12 @@ pipeline {
                 env.BRANCH} == 'main'
             }
             steps {
-                def (MMP, _) = "${TAG}".tokenize("-") // Major Minor Patch
+                def (MMP, _) = "${env.TAG}".tokenize("-") // Major Minor Patch
                 sh("""\
-                    git tag -d $(git tag -l "${MMP}-rc*")
+                    git tag -d \$(git tag -l "${MMP}-rc*")
                 """)
                 sh("""\
-                    git push -d origin $(git tag -l "$MMP-rc*")
+                    git push -d origin \$(git tag -l "${$MMP}-rc*")
                 """)
             }
         }
