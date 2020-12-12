@@ -1,6 +1,12 @@
 Changelog
 =========
 
+0.8.4 (2020-12-12)
+------------------
+- Stage: More pipeline fuckery. (20ce788) [JustAddRobots]
+- Stage: More troubleshooting tag delete. (336beac) [JustAddRobots]
+- Stage: Trouble shooting tag delete. (deafd08) [JustAddRobots]
+
 0.8.3 (2020-12-12)
 ------------------
 - Stage: Fixed tag delete syntax, ordering. (2d3e15b) [JustAddRobots]
