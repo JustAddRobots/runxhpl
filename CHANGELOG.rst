@@ -1,6 +1,10 @@
 Changelog
 =========
 
+0.8.8 (2020-12-12)
+------------------
+- Stage: Fixed typo in MMP interpolation. (a5c2ddb) [JustAddRobots]
+
 0.8.7 (2020-12-12)
 ------------------
 - Stage: More troubleshooting MMP resolution. (a0568ac) [JustAddRobots]
