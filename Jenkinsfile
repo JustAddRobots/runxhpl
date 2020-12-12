@@ -121,7 +121,8 @@ pipeline {
             }
             steps {
                 script {
-                    (env.MMP, _) = "${env.TAG}".tokenize("-") // Major Minor Patch
+                    (mmp, _) = "${env.TAG}".tokenize("-") // Major Minor Patch
+                    env.MMP = "${mmp}"
                     echo "TAG: ${env.TAG}"
                     echo "MMP: ${env.MMP}"
                     sh(
