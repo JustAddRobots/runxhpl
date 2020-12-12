@@ -7,6 +7,7 @@ def HASHLONG
 def HASHSHORT
 def TAG
 def TAG_HASH
+def MMP
 def BRANCH
 def SERVER
 
@@ -121,11 +122,23 @@ pipeline {
             }
             steps {
                 script {
-                    def (MMP, _) = "${env.TAG}".tokenize("-") // Major Minor Patch
+                    (MMP, _) = "${env.TAG}".tokenize("-") // Major Minor Patch
+                    echo "MMP: ${MMP}"
+                    sh(
+                        returnStdout: false,
+                        script: """\
+                            git push --delete origin \$(git tag -l "${$MMP}-rc*")
+                        """
+                    )
+                    sh(
+                        returnStdout: false,
+                        script: """\
+                            git tag -d \$(git tag -l "${MMP}-rc*")
+                        """
+                    )
+                //sh("""git push --delete origin \$(git tag -l "${$MMP}-rc*")""")
+                //sh("""git tag -d \$(git tag -l "${MMP}-rc*")""")
                 }
-                echo "MMP: ${MMP}"
-                sh("""git push --delete origin \$(git tag -l "${$MMP}-rc*")""")
-                sh("""git tag -d \$(git tag -l "${MMP}-rc*")""")
             }
         }
     }
