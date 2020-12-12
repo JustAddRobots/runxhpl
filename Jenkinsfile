@@ -123,6 +123,7 @@ pipeline {
                 script {
                     def (MMP, _) = "${env.TAG}".tokenize("-") // Major Minor Patch
                 }
+                echo "MMP: ${MMP}"
                 sh("""\
                     git tag -d \$(git tag -l "${MMP}-rc*")
                 """)

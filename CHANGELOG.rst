@@ -1,6 +1,10 @@
 Changelog
 =========
 
+0.8.2 (2020-12-12)
+------------------
+- Stage: Added echo of MMP for delete tag troubleshooting. (280d66f) [JustAddRobots]
+
 0.8.1 (2020-12-12)
 ------------------
 - Stage: More Troubleshooting delete RC tags stage. (622a8a4) [JustAddRobots]
