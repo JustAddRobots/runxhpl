@@ -40,49 +40,48 @@ pipeline {
         stage ('Create Tag Hash') {
             steps {
                 script {
-                    HASHLONG = sh(
+                    env.HASHLONG = sh(
                         returnStdout: true,
                         script: "git log -1 --pretty=%H --no-merges"
                     ).trim()
-                    HASHSHORT = sh(
+                    env.HASHSHORT = sh(
                         returnStdout: true,
                         script: "git log -1 --pretty=%h --no-merges"
                     ).trim()
-                    TAG = sh(
+                    env.TAG = sh(
                         returnStdout: true,
                         script: "git describe --tags --abbrev=0"
                     ).trim()
-                    TAG_HASH = "${TAG}-${HASHSHORT}-${ARCH}"
+                    env.TAG_HASH = "${env.TAG}-${env.HASHSHORT}-${env.ARCH}"
                 }
                 echo "ARCH: ${env.ARCH}"
                 echo "COMMIT: ${env.GIT_COMMIT}"
-                echo "HASHLONG: ${HASHLONG}"
-                echo "HASHSHORT: ${HASHSHORT}"
-                echo "TAG: ${TAG}"
-                echo "TAG_HASH: ${TAG_HASH}"
+                echo "HASHLONG: ${env.HASHLONG}"
+                echo "HASHSHORT: ${env.HASHSHORT}"
+                echo "TAG: ${env.TAG}"
+                echo "TAG_HASH: ${env.TAG_HASH}"
             }
         }
         stage ('Build Docker Container') {
             steps {
                 script {
-                    BRANCH = sh(
+                    env.BRANCH = sh(
                         returnStdout: true,
                         script: """\
                             git show-ref | grep `git rev-parse HEAD` | 
                             awk '{ print \$2 }' | awk -F/ '{ print \$NF}'
                         """).trim()
-                    SERVER = "hosaka.local:5000"
                 }
-                echo "BRANCH: ${BRANCH}"
+                echo "BRANCH: ${env.BRANCH}"
                 echo "DOCKERHOST: ${env.DOCKERHOST}"
                 slackSend(
                     message: """\
                         STARTED ${env.JOB_NAME} #${env.BUILD_NUMBER},
-                        v${TAG_HASH} (<${env.BUILD_URL}|Open>)
+                        v${env.TAG_HASH} (<${env.BUILD_URL}|Open>)
                     """.stripIndent()
                 )
                 sh("""\
-                    make -C docker/${ARCH}/el-7 DOCKERHOST=${env.DOCKERHOST} \
+                    make -C docker/${env.ARCH}/el-7 DOCKERHOST=${env.DOCKERHOST} \
                     ENGCOMMON_BRANCH=main build push
                 """)
             }
@@ -92,7 +91,7 @@ pipeline {
                 script {
                     IMG = ("""\
                         ${env.DOCKERHOST}/runxhpl:\
-                        ${TAG_HASH}
+                        ${env.TAG_HASH}
                     """.stripIndent().replaceAll("\\s","")
                     )
                 }
@@ -111,7 +110,7 @@ pipeline {
             }
             steps {
                 sh("""\
-                    make -C docker/${ARCH}/el-7 DOCKERHOST=${env.DOCKERHOST} \
+                    make -C docker/${env.ARCH}/el-7 DOCKERHOST=${env.DOCKERHOST} \
                     default
                 """)
             }
@@ -128,13 +127,13 @@ pipeline {
                     sh(
                         returnStdout: false,
                         script: """\
-                            git push --delete origin \$(git tag -l "${$MMP}-rc*")
+                            git push --delete origin \$(git tag -l "${env.$MMP}-rc*")
                         """
                     )
                     sh(
                         returnStdout: false,
                         script: """\
-                            git tag -d \$(git tag -l "${MMP}-rc*")
+                            git tag -d \$(git tag -l "${env.MMP}-rc*")
                         """
                     )
                 //sh("""git push --delete origin \$(git tag -l "${$MMP}-rc*")""")
@@ -149,7 +148,7 @@ pipeline {
                 color: "good",
                 message: """\
                     SUCCESS ${env.JOB_NAME} #${env.BUILD_NUMBER},
-                    v${TAG_HASH}, Took: ${currentBuild.durationString.replace(
+                    v${env.TAG_HASH}, Took: ${currentBuild.durationString.replace(
                         ' and counting', ''
                     )} (<${env.BUILD_URL}|Open>)
                 """.stripIndent()
