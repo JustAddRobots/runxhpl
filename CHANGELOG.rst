@@ -1,6 +1,13 @@
 Changelog
 =========
 
+0.8.9 (2020-12-13)
+------------------
+- Stage: Added more syntax fixes. (7ea46e8) [JustAddRobots]
+- Stage: Fixed syntax. (620a9e9) [JustAddRobots]
+- Stage: Fixed syntax error. (5ae451b) [JustAddRobots]
+- Stage: Added withCredentials for tag delete. (3fb3784) [JustAddRobots]
+
 0.8.8 (2020-12-12)
 ------------------
 - Stage: Fixed typo in MMP interpolation. (a5c2ddb) [JustAddRobots]
