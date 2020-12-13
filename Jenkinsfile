@@ -160,6 +160,7 @@ pipeline {
                     */
                 //sh("""git push --delete origin \$(git tag -l "${env.MMP}-rc*")""")
                 //sh("""git tag -d \$(git tag -l "${env.MMP}-rc*")""")
+                }
             }
         }
     }
