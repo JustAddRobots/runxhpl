@@ -117,7 +117,7 @@ pipeline {
         }
         stage('Delete RC Tags') {
             when {
-                branch 'foo'
+                branch 'main'
             }
             steps {
                 script {
@@ -125,7 +125,7 @@ pipeline {
                     env.MMP = "${mmp}"
                     echo "TAG: ${env.TAG}"
                     echo "MMP: ${env.MMP}"
-                    sshagent (credentials: ['rcon']) {
+                    sshagent (credentials: ['jenkins-github']) {
                         sh("""git push --delete origin \$(git tag -l "${env.MMP}-rc*")""")
                         sh("""git tag -d \$(git tag -l "${env.MMP}-rc*")""")
                     }
