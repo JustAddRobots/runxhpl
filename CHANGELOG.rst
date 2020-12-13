@@ -1,6 +1,10 @@
 Changelog
 =========
 
+0.8.12 (2020-12-13)
+-------------------
+- Stage: Fixed syntax in withCredentials. (c16726e) [JustAddRobots]
+
 0.8.11 (2020-12-13)
 -------------------
 - Stage: Fixed incorrect var name. (cb554c4) [JustAddRobots]
