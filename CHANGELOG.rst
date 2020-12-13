@@ -1,6 +1,10 @@
 Changelog
 =========
 
+0.8.16 (2020-12-13)
+-------------------
+- Stage: Fixed typo. (cc0c1e5) [JustAddRobots]
+
 0.8.15 (2020-12-13)
 -------------------
 - Stage: Added repo explicitly. (0d9f9df) [JustAddRobots]
