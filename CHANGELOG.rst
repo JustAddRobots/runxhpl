@@ -1,6 +1,10 @@
 Changelog
 =========
 
+0.8.11 (2020-12-13)
+-------------------
+- Stage: Fixed incorrect var name. (cb554c4) [JustAddRobots]
+
 0.8.10 (2020-12-13)
 -------------------
 - Stage: Added user/pw env vars to withCredentials delete tag stage. (149333e) [JustAddRobots]
