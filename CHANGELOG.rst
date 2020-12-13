@@ -1,6 +1,10 @@
 Changelog
 =========
 
+0.8.15 (2020-12-13)
+-------------------
+- Stage: Added repo explicitly. (0d9f9df) [JustAddRobots]
+
 0.8.14 (2020-12-13)
 -------------------
 - Stage: Testing withCredentials tag delete push with USER/PW line. (3069865) [JustAddRobots]

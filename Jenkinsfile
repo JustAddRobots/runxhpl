@@ -136,7 +136,7 @@ pipeline {
                         passwordVariable: 'GIT_PASSWORD',
                         usernameVariable: 'GIT_USERNAME'
                     )]){
-                        sh("""git push --delete https://${env.GIT_USERNAME}:${env.GIT_PASSSWORD}@<REPO> \$(git tag -l "${env.MMP}-rc*")""")
+                        sh("""git push --delete https://${env.GIT_USERNAME}:${env.GIT_PASSSWORD}@github.com/JustAddRobots/runxhpl.git \$(git tag -l "${env.MMP}-rc*")""")
                         sh("""git tag -d \$(git tag -l "${env.MMP}-rc*")""")
                     }
                 //sh("""git push --delete origin \$(git tag -l "${env.MMP}-rc*")""")
