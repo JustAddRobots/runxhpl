@@ -125,6 +125,26 @@ pipeline {
                     env.MMP = "${mmp}"
                     echo "TAG: ${env.TAG}"
                     echo "MMP: ${env.MMP}"
+                    withCredentials(usernamePassword(
+                        credentialsId: 'github-runxhpl-multibranch-stage',
+                        passwordVariable: 'GIT_PASSWORD',
+                        usernameVariable: 'GIT_USERNAME'
+                    ){
+                        sh("""git push --delete origin \$(git tag -l "${env.MMP}-rc*")""")
+                        sh("""git tag -d \$(git tag -l "${env.MMP}-rc*")""")
+                    }
+                    /*
+                        sh(
+                            returnStdout: false,
+                            script: """\
+                                git config --global credential.username {GIT_USERNAME} && \
+                                git config --global credential.helper "!echo password={GITPASSWORD}; echo" && \
+                                git push --delete origin \$(git tag -l "${env.MMP}-rc*") && \
+                                git tag -d \$(git tag -l "${env.MMP}-rc*")
+                            """
+                        )
+                    }
+                    *//*
                     sh(
                         returnStdout: false,
                         script: """\
@@ -137,6 +157,7 @@ pipeline {
                             git tag -d \$(git tag -l "${env.MMP}-rc*")
                         """
                     )
+                    */
                 //sh("""git push --delete origin \$(git tag -l "${env.MMP}-rc*")""")
                 //sh("""git tag -d \$(git tag -l "${env.MMP}-rc*")""")
                 }
