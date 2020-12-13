@@ -1,6 +1,12 @@
 Changelog
 =========
 
+0.8.13 (2020-12-13)
+-------------------
+- Stage: Switched delete tags stage back on + sshagent. (ede38f5) [JustAddRobots]
+- Stage: Troubleshooting credentials. (72ff2d9) [JustAddRobots]
+- Stage: Switched to sshagent plugin for tag delete. (0b4a149) [JustAddRobots]
+
 0.8.12 (2020-12-13)
 -------------------
 - Stage: Fixed syntax in withCredentials. (c16726e) [JustAddRobots]

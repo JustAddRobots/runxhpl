@@ -125,6 +125,11 @@ pipeline {
                     env.MMP = "${mmp}"
                     echo "TAG: ${env.TAG}"
                     echo "MMP: ${env.MMP}"
+                    sshagent (credentials: ['jenkins-github']) {
+                        sh("""git push --delete origin \$(git tag -l "${env.MMP}-rc*")""")
+                        sh("""git tag -d \$(git tag -l "${env.MMP}-rc*")""")
+                    }
+                    /*
                     withCredentials([usernamePassword(
                         credentialsId: 'github-runxhpl-multibranch-stage',
                         passwordVariable: 'GIT_PASSWORD',
@@ -135,6 +140,7 @@ pipeline {
                         sh("""git push --delete origin \$(git tag -l "${env.MMP}-rc*")""")
                         sh("""git tag -d \$(git tag -l "${env.MMP}-rc*")""")
                     }
+                    */
                 //sh("""git push --delete origin \$(git tag -l "${env.MMP}-rc*")""")
                 //sh("""git tag -d \$(git tag -l "${env.MMP}-rc*")""")
                 }
