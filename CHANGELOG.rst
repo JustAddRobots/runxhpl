@@ -1,6 +1,10 @@
 Changelog
 =========
 
+0.8.10 (2020-12-13)
+-------------------
+- Stage: Added user/pw env vars to withCredentials delete tag stage. (149333e) [JustAddRobots]
+
 0.8.9 (2020-12-13)
 ------------------
 - Stage: Added more syntax fixes. (7ea46e8) [JustAddRobots]
