@@ -1,6 +1,10 @@
 Changelog
 =========
 
+0.8.14 (2020-12-13)
+-------------------
+- Stage: Testing withCredentials tag delete push with USER/PW line. (3069865) [JustAddRobots]
+
 0.8.13 (2020-12-13)
 -------------------
 - Stage: Switched delete tags stage back on + sshagent. (ede38f5) [JustAddRobots]
