@@ -3,7 +3,7 @@ from setuptools import setup
 
 
 def readme():
-    with open("README.rst") as f:
+    with open("README.md") as f:
         return f.read()
 
 
@@ -43,11 +43,8 @@ setup(
     include_package_data = True,
     install_requires = [
         "docker",
-        (
-            "engcommon @ "
-            "git+ssh://git@engcommon.github.com/JustAddRobots/engcommon.git@{0}".format(
-                engcommon_branch
-            )
+        "engcommon @ git+https://github.com/JustAddRobots/engcommon.git@{0}".format(
+            engcommon_branch
         ),
         "numpy",
     ],
