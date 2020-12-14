@@ -57,13 +57,10 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && \
     which \
     && \
     yum clean all && rm -rf /var/cache/yum && \
-    mkdir -p /root/.ssh && \
-    wget -nv -r -l1 -np -nH --cut-dirs=3 --reject index* -P /root/.ssh/ http://hosaka.local/ark/git/DeployKeys/ && \
-    chmod 600 /root/.ssh/* && \
     python3 -m pip install --upgrade pip && \
     python3 -m pip install --upgrade setuptools && \
     echo "BRANCH: $ENGCOMMON_BRANCH" && \
-    ENGCOMMON_BRANCH=$ENGCOMMON_BRANCH python3 -m pip install --force-reinstall git+ssh://git@runxhpl.github.com/JustAddRobots/runxhpl.git@$GIT_COMMIT && \
+    ENGCOMMON_BRANCH=$ENGCOMMON_BRANCH python3 -m pip install --force-reinstall git+https://github.com/JustAddRobots/runxhpl.git@$GIT_COMMIT && \
     rm -rf ~/.cache/pip
 
 # Copy binaries
