@@ -1,81 +1,37 @@
 Changelog
 =========
 
+0.9.1 (2020-12-14)
+------------------
+- ISSUE-061: Updated to a proper install of git inside docker build. (072f257) [JustAddRobots]
+
 0.9.0 (2020-12-14)
 ------------------
 - Stage: Added runxhpl @ git+https for Docker build. (5501295) [JustAddRobots]
 - ISSUE-061: Updated for setup for engcommon @ git+https. (61ea5d7) [JustAddRobots]
-
-0.8.16 (2020-12-13)
--------------------
 - Stage: Fixed typo. (cc0c1e5) [JustAddRobots]
-
-0.8.15 (2020-12-13)
--------------------
 - Stage: Added repo explicitly. (0d9f9df) [JustAddRobots]
-
-0.8.14 (2020-12-13)
--------------------
 - Stage: Testing withCredentials tag delete push with USER/PW line. (3069865) [JustAddRobots]
-
-0.8.13 (2020-12-13)
--------------------
 - Stage: Switched delete tags stage back on + sshagent. (ede38f5) [JustAddRobots]
 - Stage: Troubleshooting credentials. (72ff2d9) [JustAddRobots]
 - Stage: Switched to sshagent plugin for tag delete. (0b4a149) [JustAddRobots]
-
-0.8.12 (2020-12-13)
--------------------
 - Stage: Fixed syntax in withCredentials. (c16726e) [JustAddRobots]
-
-0.8.11 (2020-12-13)
--------------------
 - Stage: Fixed incorrect var name. (cb554c4) [JustAddRobots]
-
-0.8.10 (2020-12-13)
--------------------
 - Stage: Added user/pw env vars to withCredentials delete tag stage. (149333e) [JustAddRobots]
-
-0.8.9 (2020-12-13)
-------------------
 - Stage: Added more syntax fixes. (7ea46e8) [JustAddRobots]
 - Stage: Fixed syntax. (620a9e9) [JustAddRobots]
 - Stage: Fixed syntax error. (5ae451b) [JustAddRobots]
 - Stage: Added withCredentials for tag delete. (3fb3784) [JustAddRobots]
-
-0.8.8 (2020-12-12)
-------------------
 - Stage: Fixed typo in MMP interpolation. (a5c2ddb) [JustAddRobots]
-
-0.8.7 (2020-12-12)
-------------------
 - Stage: More troubleshooting MMP resolution. (a0568ac) [JustAddRobots]
 - Stage: Troubleshooting env.MMP resolution for auto tag delete. (151ebaf) [JustAddRobots]
-
-0.8.6 (2020-12-12)
-------------------
 - Stage: Added vars to env. (5ec193a) [JustAddRobots]
-
-0.8.5 (2020-12-12)
-------------------
 - Stage: Troubleshooting MMP resolution. (8823393) [JustAddRobots]
-
-0.8.4 (2020-12-12)
-------------------
 - Stage: More pipeline fuckery. (20ce788) [JustAddRobots]
 - Stage: More troubleshooting tag delete. (336beac) [JustAddRobots]
 - Stage: Trouble shooting tag delete. (deafd08) [JustAddRobots]
-
-0.8.3 (2020-12-12)
-------------------
 - Stage: Fixed tag delete syntax, ordering. (2d3e15b) [JustAddRobots]
-
-0.8.2 (2020-12-12)
-------------------
 - Stage: Added echo of MMP for delete tag troubleshooting. (280d66f) [JustAddRobots]
-
-0.8.1 (2020-12-12)
-------------------
 - Stage: More Troubleshooting delete RC tags stage. (622a8a4) [JustAddRobots]
 
 0.8.0 (2020-12-12)

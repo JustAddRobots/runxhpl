@@ -23,7 +23,7 @@ ENGCOMMON_BRANCH	:= $(ENGCOMMON_BRANCH)
 all: build push
 
 build:
-	@docker build -t ${IMGLONG} --build-arg GIT_COMMIT=${HASHSHORT} --build-arg ENGCOMMON_BRANCH=${ENGCOMMON_BRANCH} --build-arg DOCKERHOST=${DOCKERHOST} --no-cache .
+	@docker build --no-cache -t ${IMGLONG} --build-arg GIT_COMMIT=${HASHSHORT} --build-arg ENGCOMMON_BRANCH=${ENGCOMMON_BRANCH} --build-arg DOCKERHOST=${DOCKERHOST} .
 	@docker tag ${IMGLONG} ${IMGSHORT}
 
 push:
