@@ -9,7 +9,6 @@ def TAG
 def TAG_HASH
 def MMP
 def BRANCH
-def SERVER
 
 def DOCKERHOST
 def KUBECONFIG
@@ -23,7 +22,6 @@ def loadProperties() {
     echo "${props}"
     env.DOCKERHOST = props["dockerhost"]
     env.KUBECONFIG = props["kubeconfig"]
-    echo "DOCKERHOST: ${DOCKERHOST}"
 }
 
 pipeline {
@@ -125,12 +123,6 @@ pipeline {
                     env.MMP = "${mmp}"
                     echo "TAG: ${env.TAG}"
                     echo "MMP: ${env.MMP}"
-                    /*
-                    sshagent (credentials: ['rcon']) {
-                        sh("""git push --delete origin \$(git tag -l "${env.MMP}-rc*")""")
-                        sh("""git tag -d \$(git tag -l "${env.MMP}-rc*")""")
-                    }
-                    */
                     withCredentials([usernamePassword(
                         credentialsId: 'github-runxhpl-multibranch-stage',
                         passwordVariable: 'GIT_PASSWORD',
@@ -139,8 +131,6 @@ pipeline {
                         sh("""git push --delete https://${env.GIT_USERNAME}:${env.GIT_PASSWORD}@github.com/JustAddRobots/runxhpl.git \$(git tag -l "${env.MMP}-rc*")""")
                         sh("""git tag -d \$(git tag -l "${env.MMP}-rc*")""")
                     }
-                //sh("""git push --delete origin \$(git tag -l "${env.MMP}-rc*")""")
-                //sh("""git tag -d \$(git tag -l "${env.MMP}-rc*")""")
                 }
             }
         }
