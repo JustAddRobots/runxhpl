@@ -1,6 +1,11 @@
 Changelog
 =========
 
+0.9.0 (2020-12-14)
+------------------
+- Stage: Added runxhpl @ git+https for Docker build. (5501295) [JustAddRobots]
+- ISSUE-061: Updated for setup for engcommon @ git+https. (61ea5d7) [JustAddRobots]
+
 0.8.16 (2020-12-13)
 -------------------
 - Stage: Fixed typo. (cc0c1e5) [JustAddRobots]
