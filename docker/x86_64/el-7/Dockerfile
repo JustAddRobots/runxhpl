@@ -41,7 +41,6 @@ ENV PATH="${PATH}:/usr/lib64/openmpi3/bin"
 # Copy binaries used for RUN
 
 COPY --from=builder \
-    /usr/bin/git \
     /usr/bin/wget \
     /usr/bin/
 
@@ -50,6 +49,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && \
     echo $TZ > /etc/timezone && \
     yum -y install \
     bzip2 \
+    git \
     dmidecode \
     openssh-clients \
     python3 \
