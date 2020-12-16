@@ -115,7 +115,7 @@ pipeline {
         }
         stage('Delete RC Tags') {
             when {
-                branch 'main'
+                branch 'foo'  // disabled until tag workflow sorted
             }
             steps {
                 script {
