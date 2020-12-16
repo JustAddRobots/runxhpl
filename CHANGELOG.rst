@@ -1,6 +1,11 @@
 Changelog
 =========
 
+0.9.3 (2020-12-16)
+------------------
+- ISSUE-068: Added echo stdout for float conversion error. (00b3b8b) [JustAddRobots]
+- ISSUE-069: Disabled delete tags stage. (b1bdcea) [JustAddRobots]
+
 0.9.1 (2020-12-14)
 ------------------
 - ISSUE-061: Updated to a proper install of git inside docker build. (072f257) [JustAddRobots]

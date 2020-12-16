@@ -262,6 +262,9 @@ class XHPL:
 
         Returns:
             runs_dict (dict): STDOUT of run keyed by run number.
+
+        Raises:
+            ValueError: Error converting GFLOPS to float, see ISSUE-068.
         """
 
         if "num_runs" not in kwargs.keys():
@@ -328,8 +331,18 @@ class XHPL:
                     xhpl_gflops,
                 ) = get_result(dict_["stdout"])
                 status_runs.append(passfail)
-                gflops_runs.append(float(xhpl_gflops))
                 time_runs.append(float(xhpl_time))
+                try:  # ISSUE-068
+                    gflops_runs.append(float(xhpl_gflops))
+                except ValueError:
+                    trunc_regex = (
+                        r"\n(WR[A-Z0-9]+\s+[0-9]+\s+[0-9]+\s+[0-9]+\s+[0-9]+\s+"
+                        r"[0-9.]+\s+[0-9.e\+]+)"
+                    )
+                    match_0 = re.search(trunc_regex, dict_["stdout"])
+                    if match_0:
+                        logger.error("Float Conversion Error, {0}".format(match_0.groups()[0]))
+                        raise
                 self._print_status(
                     status = passfail,
                     test_name = "xhpl",
