@@ -33,7 +33,7 @@ ENV RUNS=""
 ENV MEM=""
 ENV LOGID="${LOGID}"
 ENV PREFIX="${PREFIX}"
-ENV SERVER="${SERVER}"
+ENV UPLOAD="${UPLOAD}"
 ARG GIT_COMMIT="master"
 ARG ENGCOMMON_BRANCH="${ENGCOMMON_BRANCH}"
 ENV PATH="${PATH}:/usr/lib64/openmpi3/bin"
@@ -127,4 +127,4 @@ COPY --from=builder \
     /usr/lib64/libz.so.1 \
     /usr/lib64/
 
-CMD runxhpl $DEBUG $MEM $RUNS $LOGID $PREFIX $SERVER
+CMD runxhpl $DEBUG $MEM $RUNS $LOGID $PREFIX $UPLOAD
