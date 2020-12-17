@@ -58,6 +58,12 @@ pipeline {
                 echo "HASHSHORT: ${env.HASHSHORT}"
                 echo "TAG: ${env.TAG}"
                 echo "TAG_HASH: ${env.TAG_HASH}"
+                slackSend(
+                    message: """\
+                        STARTED ${env.JOB_NAME} #${env.BUILD_NUMBER},
+                        v${env.TAG_HASH} (<${env.BUILD_URL}|Open>)
+                    """.stripIndent()
+                )
             }
         }
         stage ('Build Docker Container') {
@@ -72,12 +78,6 @@ pipeline {
                 }
                 echo "BRANCH: ${env.BRANCH}"
                 echo "DOCKERHOST: ${env.DOCKERHOST}"
-                slackSend(
-                    message: """\
-                        STARTED ${env.JOB_NAME} #${env.BUILD_NUMBER},
-                        v${env.TAG_HASH} (<${env.BUILD_URL}|Open>)
-                    """.stripIndent()
-                )
                 sh("""\
                     make -C docker/${env.ARCH}/el-7 DOCKERHOST=${env.DOCKERHOST} \
                     ENGCOMMON_BRANCH=main build push
@@ -95,9 +95,9 @@ pipeline {
                 }
                 sh("""\
                         python3 /usr/local/bin/runkubejobs \
-                        -d -t runxhpl \
-                        -p /var/lib/jenkins/workspace/logs \
-                        -n all -i ${IMG}
+                        --debug --task runxhpl \
+                        --prefix /var/lib/jenkins/workspace/logs \
+                        --nodes all --image ${IMG}
                     """.stripIndent()
                 )
             }
