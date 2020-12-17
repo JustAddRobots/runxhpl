@@ -1,6 +1,10 @@
 Changelog
 =========
 
+0.10.0 (2020-12-17)
+-------------------
+- ISSUE-072: Added upload CLI option. (6f8d199) [JustAddRobots]
+
 0.9.3 (2020-12-16)
 ------------------
 - ISSUE-068: Added echo stdout for float conversion error. (00b3b8b) [JustAddRobots]
