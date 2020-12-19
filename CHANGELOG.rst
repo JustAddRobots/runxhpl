@@ -1,6 +1,10 @@
 Changelog
 =========
 
+0.10.3 (2020-12-19)
+-------------------
+- ISSUE-076: Changed colour for demo. (e9d866c) [JustAddRobots]
+
 0.10.2 (2020-12-18)
 -------------------
 - ISSUE-076: Changed colour for demo. (0e10267) [JustAddRobots]

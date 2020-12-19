@@ -111,7 +111,7 @@ def run(args):
 
     # Show logs
     logger.info("{0}: {1}".format(
-        formattext.add_colour("Status", "yellow"),
+        formattext.add_colour("Status", "cyan"),
         my_xhpl.status,
     ))
     logger.info("Mean Gflops: {0}".format(my_xhpl.gflops_mean))
