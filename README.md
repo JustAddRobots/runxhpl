@@ -8,13 +8,12 @@ Performance Linpack). It is meant more as a stress test for baremetal HPC comput
 thus command-line options are geared toward multiple successive runs.
 
 Please note that this repository currently executes the generic (**non-optimised**)
-shared-memory benchmark.
+shared-memory benchmark.  Time permitting, I'll include build tools for various 
+compilers, BLAS, and MPI implementations.
 
-One day maybe I'll include build tools for various compilers, BLAS, and MPI 
-implementations in this repo.
-
-This is primarily built as part of a proof-of-concept for a specific CI/CD environment.
-YMMV. There is **no support** for this project.
+This is primarily built as part of a proof-of-concept for a specific CI/CD environment
+(see [deployxhpl](https://github.com/JustAddRobots/deployxhpl)). YMMV. There is 
+**no support** for this project.
 
 
 ## Background
@@ -39,13 +38,15 @@ https://ulhpc-tutorials.readthedocs.io/en/latest/parallel/mpi/HPL/#hpl-main-para
 
 ## Features
 
-* Run XHPL with Targed Runs and Memory Usage
+* Run XHPL with Targeted Runs and Memory Usage
 * Topology Query
 
 
 ## Installing
 
-
+```
+python3 -m pip install git+https://github.com/JustAddRobots/runxhpl.git
+```
 
 ## Usage
 
