@@ -1,6 +1,10 @@
 Changelog
 =========
 
+0.10.5 (2020-12-20)
+-------------------
+- ISSUE-083: Added installation notes, misc edits. (d0e071c) [JustAddRobots]
+
 0.10.4 (2020-12-19)
 -------------------
 - ISSUE-076: Changed colour for demo. (5b0d5e2) [JustAddRobots]
